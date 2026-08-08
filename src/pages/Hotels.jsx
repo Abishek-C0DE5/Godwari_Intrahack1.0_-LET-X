@@ -9,12 +9,17 @@ export default function Hotels() {
 
   useEffect(() => {
     const fetchHotels = async () => {
-      const { data, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('role', 'hotel');
-        
-      const dbHotels = data && !error ? data : [];
+      let dbHotels = [];
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('role', 'hotel');
+          
+        if (data && !error) dbHotels = data;
+      } catch (err) {
+        console.error('Failed to fetch from DB, using mock data:', err);
+      }
       
       const mockHotels = [
         { id: 'h1', name: 'Kathmandu Heritage Resort', description: 'Luxury Heritage Stay', avatar_url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80', rating: 4.8, location: 'Thamel, Kathmandu', price: 'NPR 12000/night' },
@@ -25,7 +30,6 @@ export default function Hotels() {
         { id: 'h6', name: 'Bhaktapur Guest House', description: 'Authentic Newari Architecture', avatar_url: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=80', rating: 4.6, location: 'Bhaktapur Durbar', price: 'NPR 4500/night' },
       ];
 
-      // Merge database hotels with mock hotels, avoiding duplicates by name
       const dbNames = dbHotels.map(h => h.name);
       const filteredMocks = mockHotels.filter(m => !dbNames.includes(m.name));
 
@@ -38,7 +42,7 @@ export default function Hotels() {
 
   return (
     <div className="max-w-7xl mx-auto w-full px-6 py-12">
-      <div className="mb-10 text-center max-w-2xl mx-auto">
+      <div className="mb-10 text-center max-w-2xl mx-auto animate-fade-in-up">
         <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mx-auto mb-4">
           <HomeIcon className="w-6 h-6" />
         </div>
@@ -54,19 +58,20 @@ export default function Hotels() {
         <div className="text-center py-20 text-gray-500">No hotels found.</div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {hotels.map(hotel => (
-            <Card 
-              key={hotel.id}
-              type="hotel"
-              title={hotel.name}
-              subtitle={hotel.description || 'Accommodation'}
-              image={hotel.avatar_url}
-              rating={hotel.rating}
-              location={hotel.location}
-              price={hotel.price}
-              linkTo="#"
-              actionText="View Details"
-            />
+          {hotels.map((hotel, index) => (
+            <div key={hotel.id} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+              <Card 
+                type="hotel"
+                title={hotel.name}
+                subtitle={hotel.description || 'Accommodation'}
+                image={hotel.avatar_url}
+                rating={hotel.rating}
+                location={hotel.location}
+                price={hotel.price}
+                linkTo="#"
+                actionText="View Details"
+              />
+            </div>
           ))}
         </div>
       )}

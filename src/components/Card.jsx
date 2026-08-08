@@ -21,15 +21,16 @@ export function Card({
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all">
-      <div className="aspect-[4/3] overflow-hidden relative">
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 group">
         <img 
           src={displayImage} 
-          alt={title} 
+          alt={title}
+          loading="lazy"
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = placeholder;
           }}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
         />
           {type === 'guide' && (
             <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-semibold text-gray-900">
