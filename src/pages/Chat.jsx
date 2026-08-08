@@ -4,56 +4,112 @@ import { Search, Send } from 'lucide-react';
 
 export default function Chat() {
   const { profile } = useAuth();
+  const role = profile?.role || 'tourist';
   
-  // Mock conversations
-  const mockConversations = [
-    {
-      id: 1,
-      name: 'Ram Gurung',
-      type: 'guide',
-      lastMessage: 'I can take you to the peace pagoda.',
-      time: '10:30 AM',
-      avatar: 'https://ui-avatars.com/api/?name=Ram+Gurung&background=random&size=150'
-    },
-    {
-      id: 2,
-      name: 'Hotel Himalayan',
-      type: 'hotel',
-      lastMessage: 'Yes, we have a deluxe room available for those dates.',
-      time: 'Yesterday',
-      unread: 0,
-      avatar: 'https://picsum.photos/seed/HotelHimalayan/150/150'
+  // Conditionally generate mock conversations based on who is logged in
+  const getMockConversations = () => {
+    if (role === 'guide') {
+      return [
+        { id: 10, name: 'Prakash Sharma', type: 'tourist', lastMessage: 'Looking forward to the trek!', time: '10:30 AM', avatar: 'https://ui-avatars.com/api/?name=Prakash+Sharma&background=random&size=150' },
+        { id: 11, name: 'Anna Smith', type: 'tourist', lastMessage: 'Can we start earlier on day 2?', time: 'Yesterday', avatar: 'https://ui-avatars.com/api/?name=Anna+Smith&background=random&size=150' },
+        { id: 12, name: 'John Doe', type: 'tourist', lastMessage: 'Thanks for the amazing tour!', time: 'Mon', avatar: 'https://ui-avatars.com/api/?name=John+Doe&background=random&size=150' },
+        { id: 13, name: 'Maya Rai', type: 'tourist', lastMessage: 'Do you provide sleeping bags?', time: 'Sun', avatar: 'https://ui-avatars.com/api/?name=Maya+Rai&background=random&size=150' },
+        { id: 14, name: 'Bikash Tamang', type: 'tourist', lastMessage: 'I need to reschedule our trip.', time: 'Last Week', avatar: 'https://ui-avatars.com/api/?name=Bikash+Tamang&background=random&size=150' },
+        { id: 15, name: 'Sarah Chen', type: 'tourist', lastMessage: 'How difficult is the EBC trek?', time: 'Last Week', avatar: 'https://ui-avatars.com/api/?name=Sarah+Chen&background=random&size=150' },
+        { id: 16, name: 'David Miller', type: 'tourist', lastMessage: 'We are a group of 5.', time: '2 weeks ago', avatar: 'https://ui-avatars.com/api/?name=David+Miller&background=random&size=150' },
+        { id: 17, name: 'Nima Sherpa', type: 'tourist', lastMessage: 'Perfect, see you at 8 AM.', time: '1 month ago', avatar: 'https://ui-avatars.com/api/?name=Nima+Sherpa&background=random&size=150' },
+      ];
     }
-  ];
+    if (role === 'hotel') {
+      return [
+        { id: 20, name: 'David Miller', type: 'tourist', lastMessage: 'Do you offer airport pickup?', time: '09:15 AM', avatar: 'https://ui-avatars.com/api/?name=David+Miller&background=random&size=150' },
+        { id: 21, name: 'Sarah Chen', type: 'tourist', lastMessage: 'Thanks, booking confirmed.', time: 'Yesterday', avatar: 'https://ui-avatars.com/api/?name=Sarah+Chen&background=random&size=150' },
+        { id: 22, name: 'Prakash Sharma', type: 'tourist', lastMessage: 'Is breakfast included?', time: 'Mon', avatar: 'https://ui-avatars.com/api/?name=Prakash+Sharma&background=random&size=150' },
+        { id: 23, name: 'Anna Smith', type: 'tourist', lastMessage: 'We will arrive around 9 PM.', time: 'Sun', avatar: 'https://ui-avatars.com/api/?name=Anna+Smith&background=random&size=150' },
+        { id: 24, name: 'John Doe', type: 'tourist', lastMessage: 'Can we get an extra bed?', time: 'Last Week', avatar: 'https://ui-avatars.com/api/?name=John+Doe&background=random&size=150' },
+        { id: 25, name: 'Maya Rai', type: 'tourist', lastMessage: 'We loved our stay, thank you!', time: 'Last Week', avatar: 'https://ui-avatars.com/api/?name=Maya+Rai&background=random&size=150' },
+        { id: 26, name: 'Bikash Tamang', type: 'tourist', lastMessage: 'Do you have parking space?', time: '2 weeks ago', avatar: 'https://ui-avatars.com/api/?name=Bikash+Tamang&background=random&size=150' },
+        { id: 27, name: 'Nima Sherpa', type: 'tourist', lastMessage: 'I need to cancel my reservation.', time: '1 month ago', avatar: 'https://ui-avatars.com/api/?name=Nima+Sherpa&background=random&size=150' },
+      ];
+    }
+    // Default: Tourist
+    return [
+      { id: 1, name: 'Ram Gurung', type: 'guide', lastMessage: 'I can take you to the peace pagoda.', time: '10:30 AM', avatar: 'https://ui-avatars.com/api/?name=Ram+Gurung&background=random&size=150' },
+      { id: 2, name: 'Hotel Himalayan', type: 'hotel', lastMessage: 'Yes, we have a deluxe room available.', time: 'Yesterday', avatar: 'https://picsum.photos/seed/HotelHimalayan/150/150' },
+      { id: 3, name: 'Sita Thapa', type: 'guide', lastMessage: 'The cultural tour starts at 9 AM.', time: 'Mon', avatar: 'https://ui-avatars.com/api/?name=Sita+Thapa&background=random&size=150' },
+      { id: 4, name: 'Kathmandu Heritage Resort', type: 'hotel', lastMessage: 'Your room is ready.', time: 'Sun', avatar: 'https://picsum.photos/seed/KtmResort/150/150' },
+      { id: 5, name: 'Pasang Sherpa', type: 'guide', lastMessage: 'Bring warm clothes for the trek.', time: 'Last Week', avatar: 'https://ui-avatars.com/api/?name=Pasang+Sherpa&background=random&size=150' },
+      { id: 6, name: 'Chitwan Jungle Lodge', type: 'hotel', lastMessage: 'The safari jeep leaves at 6 AM.', time: 'Last Week', avatar: 'https://picsum.photos/seed/ChitwanLodge/150/150' },
+      { id: 7, name: 'Bishal Karki', type: 'guide', lastMessage: 'I have attached the itinerary PDF.', time: '2 weeks ago', avatar: 'https://ui-avatars.com/api/?name=Bishal+Karki&background=random&size=150' },
+      { id: 8, name: 'Pokhara Lakeside Inn', type: 'hotel', lastMessage: 'Thank you for your review!', time: '1 month ago', avatar: 'https://picsum.photos/seed/LakesideInn/150/150' },
+    ];
+  };
 
-  // Store messages by conversation ID
-  const [messagesData, setMessagesData] = useState({
-    1: [
-      { id: 101, text: 'Hi Ram! Are you available for a hike to the Peace Pagoda this Saturday?', sender: 'me', time: '10:00 AM' },
-      { id: 102, text: 'Hello! Yes, I am available. I can take you to the peace pagoda.', sender: 'them', time: '10:30 AM' },
-    ],
-    2: [
-      { id: 201, text: 'Do you have a room available for two people from August 12 to August 15?', sender: 'me', time: 'Yesterday, 14:00' },
-      { id: 202, text: 'Yes, we have a deluxe room available for those dates.', sender: 'them', time: 'Yesterday, 14:30' },
-    ]
-  });
+  const getInitialMessages = () => {
+    // We just return a generic set of messages for each ID to avoid writing 24 different message arrays
+    const genericMessages = {
+      me: 'Hi, I had a question regarding the booking.',
+      them: 'Hello! How can I help you today?'
+    };
 
-  const [activeChat, setActiveChat] = useState(mockConversations[1]);
+    const messages = {};
+    const convos = getMockConversations();
+    
+    convos.forEach(convo => {
+      messages[convo.id] = [
+        { id: Date.now() + Math.random(), text: genericMessages.me, sender: 'me', time: 'Yesterday' },
+        { id: Date.now() + Math.random(), text: genericMessages.them, sender: 'them', time: 'Yesterday' },
+        { id: Date.now() + Math.random(), text: convo.lastMessage, sender: convo.id < 100 ? 'them' : 'me', time: convo.time },
+      ];
+    });
+
+    // Override the first one for a more natural feel
+    if (role === 'guide') {
+      messages[10] = [
+        { id: 1001, text: 'Hi! I saw your profile and would love to book a 3-day trek.', sender: 'them', time: '10:00 AM' },
+        { id: 1002, text: 'Great! I am available. I will send you the itinerary.', sender: 'me', time: '10:15 AM' },
+        { id: 1003, text: 'Looking forward to the trek!', sender: 'them', time: '10:30 AM' },
+      ];
+    } else if (role === 'hotel') {
+      messages[20] = [
+        { id: 2001, text: 'Hi, I booked a room for next week. Do you offer airport pickup?', sender: 'them', time: '09:15 AM' },
+      ];
+    } else {
+      messages[1] = [
+        { id: 101, text: 'Hi Ram! Are you available for a hike to the Peace Pagoda this Saturday?', sender: 'me', time: '10:00 AM' },
+        { id: 102, text: 'Hello! Yes, I am available. I can take you to the peace pagoda.', sender: 'them', time: '10:30 AM' },
+      ];
+    }
+    return messages;
+  };
+
+  const [mockConversations, setMockConversations] = useState(getMockConversations());
+  const [messagesData, setMessagesData] = useState(getInitialMessages());
+  const [activeChat, setActiveChat] = useState(mockConversations[0]);
   const [message, setMessage] = useState('');
   const [activeMessages, setActiveMessages] = useState([]);
 
-  // When active chat changes, update the visible messages
   useEffect(() => {
-    setActiveMessages(messagesData[activeChat.id] || []);
+    const newConvos = getMockConversations();
+    setMockConversations(newConvos);
+    setMessagesData(getInitialMessages());
+    if (newConvos.length > 0) {
+      setActiveChat(newConvos[0]);
+    }
+  }, [role]);
+
+  useEffect(() => {
+    if (activeChat) {
+      setActiveMessages(messagesData[activeChat.id] || []);
+    }
   }, [activeChat, messagesData]);
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
+    if (!message.trim() || !activeChat) return;
     
     const newMsg = { id: Date.now(), text: message, sender: 'me', time: 'Just now' };
     
-    // Update global message store
     setMessagesData(prev => ({
       ...prev,
       [activeChat.id]: [...(prev[activeChat.id] || []), newMsg]
@@ -61,11 +117,18 @@ export default function Chat() {
     
     setMessage('');
     
-    // Fake response depending on type
     setTimeout(() => {
-      const replyText = activeChat.type === 'guide' 
-        ? 'Sounds like a great plan! I will prepare the itinerary.' 
-        : 'Thank you for your message. Your booking is confirmed.';
+      let replyText = 'Thank you for your message!';
+      
+      if (role === 'tourist') {
+        replyText = activeChat.type === 'guide' 
+          ? 'Sounds like a great plan! I will prepare the itinerary.' 
+          : 'Thank you for your message. We will check availability.';
+      } else if (role === 'guide') {
+        replyText = 'Okay, I will review the itinerary and let you know.';
+      } else if (role === 'hotel') {
+        replyText = 'Thanks, we will confirm our arrival time soon.';
+      }
         
       const replyMsg = { id: Date.now(), text: replyText, sender: 'them', time: 'Just now' };
       
@@ -76,10 +139,11 @@ export default function Chat() {
     }, 1500);
   };
 
+  if (!activeChat) return <div className="p-10 text-center">Loading chats...</div>;
+
   return (
-    <div className="max-w-7xl mx-auto w-full px-6 py-8 h-[calc(100vh-80px)] flex gap-6">
+    <div className="max-w-7xl mx-auto w-full px-6 py-8 h-[calc(100vh-80px)] flex gap-6 font-sans">
       
-      {/* Sidebar - Conversations */}
       <div className="w-1/3 bg-white rounded-3xl shadow-sm border border-gray-100 flex flex-col overflow-hidden">
         <div className="p-6 border-b border-gray-100">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Messages</h2>
@@ -102,11 +166,6 @@ export default function Chat() {
             >
               <div className="relative">
                 <img src={chat.avatar} alt={chat.name} className="w-12 h-12 rounded-full object-cover" />
-                {chat.unread > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
-                    {chat.unread}
-                  </span>
-                )}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-baseline mb-0.5">
@@ -120,26 +179,24 @@ export default function Chat() {
         </div>
       </div>
 
-      {/* Main Chat Area */}
       <div className="flex-1 bg-white rounded-3xl shadow-sm border border-gray-100 flex flex-col overflow-hidden">
-        {/* Chat Header */}
         <div className="p-6 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img src={activeChat.avatar} alt={activeChat.name} className="w-10 h-10 rounded-full object-cover" />
             <div>
               <h2 className="font-bold text-gray-900 flex items-center gap-2">
                 {activeChat.name}
-                {activeChat.type === 'guide' ? (
-                  <span className="bg-indigo-50 text-indigo-700 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">Guide</span>
-                ) : (
-                  <span className="bg-blue-50 text-blue-700 text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">Hotel</span>
-                )}
+                <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold ${
+                  activeChat.type === 'guide' ? 'bg-indigo-50 text-indigo-700' :
+                  activeChat.type === 'hotel' ? 'bg-blue-50 text-blue-700' : 'bg-green-50 text-green-700'
+                }`}>
+                  {activeChat.type}
+                </span>
               </h2>
             </div>
           </div>
         </div>
 
-        {/* Messages */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50">
           {activeMessages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
@@ -157,7 +214,6 @@ export default function Chat() {
           ))}
         </div>
 
-        {/* Input Area */}
         <div className="p-4 bg-white border-t border-gray-100">
           <form onSubmit={handleSend} className="flex gap-2">
             <input 
