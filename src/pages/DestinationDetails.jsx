@@ -56,25 +56,25 @@ export default function DestinationDetails() {
 
   return (
     <div className="max-w-7xl mx-auto w-full px-6 py-12">
-      <Link to="/destinations" className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-slate-900 mb-8">
+      <Link to="/destinations" className="inline-flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white mb-8">
         <ArrowLeft className="w-4 h-4" /> Back to Destinations
       </Link>
 
       {/* Destination Hero */}
-      <div className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-3xl overflow-hidden shadow-sm border border-white/10 mb-12">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-xl rounded-3xl overflow-hidden shadow-sm border border-white/10 mb-12">
         <div className="aspect-[21/9] w-full relative">
           <img src={destination.image_url} alt={destination.name} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
           <div className="absolute bottom-8 left-8 right-8">
-            <h1 className="text-5xl font-bold text-slate-900 mb-2">{destination.name}</h1>
-            <div className="flex items-center gap-2 text-slate-900/90">
+            <h1 className="text-5xl font-bold text-white mb-2">{destination.name}</h1>
+            <div className="flex items-center gap-2 text-white/90">
               <MapPin className="w-5 h-5" /> {destination.location}
             </div>
           </div>
         </div>
         <div className="p-8">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">About {destination.name}</h2>
-          <p className="text-slate-600 leading-relaxed text-lg">{destination.description}</p>
+          <h2 className="text-xl font-bold text-white mb-4">About {destination.name}</h2>
+          <p className="text-gray-400 leading-relaxed text-lg">{destination.description}</p>
         </div>
       </div>
 
@@ -84,10 +84,10 @@ export default function DestinationDetails() {
         {/* Guides Section */}
         <section>
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Local Guides in {destination.name}</h2>
+            <h2 className="text-2xl font-bold text-white">Local Guides in {destination.name}</h2>
           </div>
           {guides.length === 0 ? (
-            <div className="bg-transparent rounded-2xl p-8 text-center text-slate-500 border border-white/10">
+            <div className="bg-transparent rounded-2xl p-8 text-center text-gray-300 border border-white/10">
               No guides are currently registered in this location.
             </div>
           ) : (
@@ -113,10 +113,10 @@ export default function DestinationDetails() {
         {/* Hotels Section */}
         <section>
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-slate-900">Hotels & Stays</h2>
+            <h2 className="text-2xl font-bold text-white">Hotels & Stays</h2>
           </div>
           {hotels.length === 0 ? (
-            <div className="bg-transparent rounded-2xl p-8 text-center text-slate-500 border border-white/10">
+            <div className="bg-transparent rounded-2xl p-8 text-center text-gray-300 border border-white/10">
               No hotels are currently registered in this location.
             </div>
           ) : (

@@ -41,10 +41,10 @@ export default function AIAssistant() {
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-white/10 flex flex-col h-[320px] w-full">
+    <div className="bg-black/20 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 flex flex-col h-[280px] w-full">
       {/* Header */}
-      <div className="px-4 py-3 bg-gradient-to-r from-blue-700 to-blue-600 text-slate-900 flex items-center gap-2 rounded-t-2xl border-b border-slate-200/60/50">
-        <Sparkles className="w-4 h-4 text-slate-600" />
+      <div className="px-4 py-3 bg-blue-700/80 text-white flex items-center gap-2 rounded-t-2xl border-b border-white/10">
+        <Sparkles className="w-4 h-4 text-blue-200" />
         <span className="font-bold text-sm tracking-wide">AI Travel Assistant</span>
       </div>
 
@@ -54,8 +54,8 @@ export default function AIAssistant() {
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm font-medium leading-relaxed ${
               msg.role === 'user' 
-                ? 'bg-blue-600 text-slate-900 rounded-br-sm shadow-md shadow-blue-600/20' 
-                : 'bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 border border-white/10 text-slate-900 rounded-bl-sm shadow-sm'
+                ? 'bg-blue-600 text-white rounded-br-sm shadow-md' 
+                : 'bg-white/10 border border-white/20 text-white rounded-bl-sm shadow-sm'
             }`}>
               {msg.text}
             </div>
@@ -63,7 +63,7 @@ export default function AIAssistant() {
         ))}
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 border border-white/10 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1">
+            <div className="bg-white/10 border border-white/20 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1">
               <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
               <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
               <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
@@ -73,19 +73,19 @@ export default function AIAssistant() {
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-white/10 bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-b-2xl">
+      <div className="p-3 border-t border-white/10 bg-black/20 rounded-b-2xl">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input 
             type="text" 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about Nepal tourism..." 
-            className="flex-1 bg-gray-100 border border-transparent rounded-xl px-4 py-2.5 text-sm font-medium focus:bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 focus:border-blue-300 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-400"
+            className="flex-1 bg-black/40 border border-white/20 rounded-xl px-4 py-2.5 text-sm font-medium text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-500/50 transition-all"
           />
           <button 
             type="submit"
             disabled={isTyping}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-slate-900 px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-600/20 active:scale-95 flex items-center justify-center"
+            className="bg-blue-700 hover:bg-blue-800 disabled:bg-blue-400/50 text-white px-4 py-2.5 rounded-xl transition-all shadow-md active:scale-95 flex items-center justify-center"
           >
             <Send className="w-4 h-4" />
           </button>

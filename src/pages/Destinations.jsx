@@ -51,8 +51,8 @@ export default function Destinations() {
         <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mx-auto mb-4">
           <Compass className="w-6 h-6" />
         </div>
-        <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">Explore Destinations</h1>
-        <p className="text-lg text-slate-500 mb-8">
+        <h1 className="text-4xl font-bold text-white tracking-tight mb-4">Explore Destinations</h1>
+        <p className="text-lg text-gray-300 mb-8">
           Discover the most beautiful places to visit based on the adventures you seek.
         </p>
 
@@ -64,8 +64,8 @@ export default function Destinations() {
               onClick={() => setSelectedTopic(topic)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedTopic === topic
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 shadow-md'
-                  : 'bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 border border-white/10 text-slate-600 hover:border-blue-300 hover:text-blue-600'
+                  ? 'bg-blue-700 text-white shadow-md shadow-blue-900/50 shadow-xl shadow-md'
+                  : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-xl border border-white/10 text-gray-400 hover:border-blue-300 hover:text-blue-600'
               }`}
             >
               {topic}
@@ -75,9 +75,9 @@ export default function Destinations() {
       </div>
 
       {loading ? (
-        <div className="text-center py-20 text-slate-500">Loading destinations...</div>
+        <div className="text-center py-20 text-gray-300">Loading destinations...</div>
       ) : filteredDestinations.length === 0 ? (
-        <div className="text-center py-20 text-slate-500">
+        <div className="text-center py-20 text-gray-300">
           <p className="mb-2">No destinations found for "{selectedTopic}".</p>
           <p className="text-sm">Make sure you have run the `05_add_destination_activities.sql` migration!</p>
         </div>

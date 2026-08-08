@@ -6,8 +6,8 @@ export const ProtectedRoute = ({ children, allowedRoles }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60">
-        <div className="text-slate-500">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-transparent">
+        <div className="text-white">Loading...</div>
       </div>
     );
   }

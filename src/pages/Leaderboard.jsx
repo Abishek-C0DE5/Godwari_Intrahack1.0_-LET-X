@@ -33,17 +33,17 @@ export default function Leaderboard() {
         <div className="w-16 h-16 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-500 mx-auto mb-6">
           <Trophy className="w-8 h-8" />
         </div>
-        <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-4">Tourism Leaderboard</h1>
-        <p className="text-lg text-slate-500">
+        <h1 className="text-4xl font-bold text-white tracking-tight mb-4">Tourism Leaderboard</h1>
+        <p className="text-lg text-gray-300">
           Explore destinations, complete trips, and leave reviews to earn points and climb the ranks!
         </p>
       </div>
 
-      <div className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-3xl shadow-sm border border-white/10 overflow-hidden">
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-xl rounded-3xl shadow-sm border border-white/10 overflow-hidden">
         {loading ? (
-          <div className="text-center py-20 text-slate-500">Loading rankings...</div>
+          <div className="text-center py-20 text-gray-300">Loading rankings...</div>
         ) : leaders.length === 0 ? (
-          <div className="text-center py-20 text-slate-500">No rankings available yet.</div>
+          <div className="text-center py-20 text-gray-300">No rankings available yet.</div>
         ) : (
           <div className="divide-y divide-gray-100">
             {leaders.map((user, index) => (
@@ -54,16 +54,16 @@ export default function Leaderboard() {
                 <div className="flex items-center gap-6">
                   <div className={`w-10 text-center font-bold text-lg ${
                     index === 0 ? 'text-yellow-500' : 
-                    index === 1 ? 'text-slate-600' : 
-                    index === 2 ? 'text-amber-700' : 'text-slate-600'
+                    index === 1 ? 'text-gray-400' : 
+                    index === 2 ? 'text-amber-700' : 'text-gray-400'
                   }`}>
                     {index < 3 ? <Medal className="w-8 h-8 mx-auto" /> : `#${index + 1}`}
                   </div>
                   
                   <div>
-                    <div className="font-bold text-slate-900 text-lg">{user.name}</div>
+                    <div className="font-bold text-white text-lg">{user.name}</div>
                     {user.location && (
-                      <div className="flex items-center gap-1 text-sm text-slate-500 mt-1">
+                      <div className="flex items-center gap-1 text-sm text-gray-300 mt-1">
                         <MapPin className="w-3.5 h-3.5" /> {user.location}
                       </div>
                     )}
@@ -72,7 +72,7 @@ export default function Leaderboard() {
                 
                 <div className="text-right">
                   <div className="font-bold text-blue-600 text-xl">{user.points?.toLocaleString() || 0}</div>
-                  <div className="text-xs font-medium text-slate-500 uppercase tracking-wider">Points</div>
+                  <div className="text-xs font-medium text-gray-300 uppercase tracking-wider">Points</div>
                 </div>
               </div>
             ))}
@@ -81,7 +81,7 @@ export default function Leaderboard() {
       </div>
       
       <div className="mt-8 text-center">
-        <Link to="/tourist" className="text-sm font-medium text-slate-500 hover:text-slate-900">
+        <Link to="/tourist" className="text-sm font-medium text-gray-300 hover:text-white">
           ← Back to Dashboard
         </Link>
       </div>

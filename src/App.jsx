@@ -21,20 +21,9 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col flex-1 relative bg-gray-900 overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="/images/bg.png" 
-          alt="Nepal Tourism Background" 
-          className="w-full h-full object-cover animate-fade-in-up"
-          style={{ animationDuration: '2s' }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/30 via-transparent to-gray-900/60"></div>
-      </div>
-
+    <div className="flex flex-col flex-1 w-full">
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-5xl mx-auto relative z-10 w-full mt-10">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-5xl mx-auto w-full mt-10">
         <div className="animate-fade-in-up">
           <h1 className="text-6xl md:text-8xl font-black text-white tracking-tight leading-[1.1] mb-8 drop-shadow-2xl">
             Explore Nepal.<br/>
@@ -44,7 +33,7 @@ function Home() {
             Experience the Himalayas like never before. Discover breathtaking destinations, book expert local guides, and find the perfect stay.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Link to="/register" className="bg-blue-600 text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-blue-700 hover:scale-105 shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300">
+            <Link to="/register" className="bg-blue-700 text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-blue-800 hover:scale-105 shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300">
               Start Exploring
             </Link>
             <Link to="/destinations" className="text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-white/10 hover:scale-105 transition-all duration-300 border-2 border-white/50 backdrop-blur-sm shadow-xl">
@@ -55,7 +44,7 @@ function Home() {
       </main>
 
       {/* Footer and Status */}
-      <footer className="py-6 text-center text-sm text-gray-300 flex flex-col items-center gap-3 relative z-10 bg-black/40 backdrop-blur-sm mt-auto">
+      <footer className="py-6 text-center text-sm text-gray-300 flex flex-col items-center gap-3 bg-black/40 backdrop-blur-sm mt-auto">
         <div className="font-medium">&copy; {new Date().getFullYear()} YatraVerse. All rights reserved.</div>
       </footer>
     </div>
@@ -77,64 +66,78 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-100 via-white to-blue-50 text-slate-900">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            
-            <Route path="/destinations" element={<Destinations />} />
-            <Route path="/destinations/:id" element={<DestinationDetails />} />
-            <Route path="/guides" element={<Guides />} />
-            <Route path="/hotels" element={<Hotels />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            
-            <Route 
-              path="/tourist" 
-              element={
-                <ProtectedRoute allowedRoles={['tourist']}>
-                  <TouristDashboard />
-                </ProtectedRoute>
-              } 
+        <div className="min-h-screen flex flex-col relative bg-gray-900 overflow-x-hidden">
+          {/* Global Background Image with Overlay */}
+          <div className="fixed inset-0 z-0">
+            <img 
+              src="/images/bg.png" 
+              alt="Nepal Tourism Background" 
+              className="w-full h-full object-cover animate-fade-in-up"
+              style={{ animationDuration: '2s' }}
             />
-            <Route 
-              path="/guide" 
-              element={
-                <ProtectedRoute allowedRoles={['guide']}>
-                  <GuideDashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/hotel" 
-              element={
-                <ProtectedRoute allowedRoles={['hotel']}>
-                  <HotelDashboard />
-                </ProtectedRoute>
-              } 
-            />
-            
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route 
-              path="/jobs" 
-              element={
-                <ProtectedRoute allowedRoles={['guide']}>
-                  <GuideJobs />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/reservations" 
-              element={
-                <ProtectedRoute allowedRoles={['hotel']}>
-                  <HotelLedger />
-                </ProtectedRoute>
-              } 
-            />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 via-gray-900/60 to-gray-900/90"></div>
+          </div>
+          
+          {/* App Content Layer */}
+          <div className="relative z-10 flex flex-col flex-1 text-white">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/destinations/:id" element={<DestinationDetails />} />
+              <Route path="/guides" element={<Guides />} />
+              <Route path="/hotels" element={<Hotels />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              
+              <Route 
+                path="/tourist" 
+                element={
+                  <ProtectedRoute allowedRoles={['tourist']}>
+                    <TouristDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/guide" 
+                element={
+                  <ProtectedRoute allowedRoles={['guide']}>
+                    <GuideDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/hotel" 
+                element={
+                  <ProtectedRoute allowedRoles={['hotel']}>
+                    <HotelDashboard />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route 
+                path="/jobs" 
+                element={
+                  <ProtectedRoute allowedRoles={['guide']}>
+                    <GuideJobs />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/reservations" 
+                element={
+                  <ProtectedRoute allowedRoles={['hotel']}>
+                    <HotelLedger />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </div>
         </div>
       </BrowserRouter>
     </AuthProvider>

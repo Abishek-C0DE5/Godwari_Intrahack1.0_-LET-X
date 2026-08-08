@@ -144,11 +144,11 @@ export default function Chat() {
   return (
     <div className="max-w-7xl mx-auto w-full px-6 py-8 h-[calc(100vh-80px)] flex gap-6 font-sans">
       
-      <div className="w-1/3 bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-3xl shadow-sm border border-white/10 flex flex-col overflow-hidden">
+      <div className="w-1/3 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl rounded-3xl shadow-sm border border-white/10 flex flex-col overflow-hidden">
         <div className="p-6 border-b border-white/10">
-          <h2 className="text-xl font-bold text-slate-900 mb-4">Messages</h2>
+          <h2 className="text-xl font-bold text-white mb-4">Messages</h2>
           <div className="relative">
-            <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-600" />
+            <Search className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input 
               type="text" 
               placeholder="Search conversations..." 
@@ -169,22 +169,22 @@ export default function Chat() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-baseline mb-0.5">
-                  <h3 className="font-semibold text-slate-900 truncate">{chat.name}</h3>
-                  <span className="text-xs text-slate-600">{chat.time}</span>
+                  <h3 className="font-semibold text-white truncate">{chat.name}</h3>
+                  <span className="text-xs text-gray-400">{chat.time}</span>
                 </div>
-                <p className="text-sm text-slate-500 truncate">{chat.lastMessage}</p>
+                <p className="text-sm text-gray-300 truncate">{chat.lastMessage}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="flex-1 bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-3xl shadow-sm border border-white/10 flex flex-col overflow-hidden">
+      <div className="flex-1 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl rounded-3xl shadow-sm border border-white/10 flex flex-col overflow-hidden">
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <img src={activeChat.avatar} alt={activeChat.name} className="w-10 h-10 rounded-full object-cover" />
             <div>
-              <h2 className="font-bold text-slate-900 flex items-center gap-2">
+              <h2 className="font-bold text-white flex items-center gap-2">
                 {activeChat.name}
                 <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold ${
                   activeChat.type === 'guide' ? 'bg-blue-50 text-blue-700' :
@@ -202,11 +202,11 @@ export default function Chat() {
             <div key={msg.id} className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[70%] rounded-2xl px-5 py-3 ${
                 msg.sender === 'me' 
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 rounded-br-sm' 
-                  : 'bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 border border-white/10 text-slate-900 rounded-bl-sm shadow-sm'
+                  ? 'bg-blue-700 text-white shadow-md shadow-blue-900/50 shadow-xl rounded-br-sm' 
+                  : 'bg-white/10 backdrop-blur-md border border-white/20 shadow-xl border border-white/10 text-white rounded-bl-sm shadow-sm'
               }`}>
                 <p className="text-[15px]">{msg.text}</p>
-                <span className={`text-[10px] mt-1 block ${msg.sender === 'me' ? 'text-slate-600' : 'text-slate-600'}`}>
+                <span className={`text-[10px] mt-1 block ${msg.sender === 'me' ? 'text-gray-400' : 'text-gray-400'}`}>
                   {msg.time}
                 </span>
               </div>
@@ -214,7 +214,7 @@ export default function Chat() {
           ))}
         </div>
 
-        <div className="p-4 bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 border-t border-white/10">
+        <div className="p-4 bg-white/10 backdrop-blur-md border border-white/20 shadow-xl border-t border-white/10">
           <form onSubmit={handleSend} className="flex gap-2">
             <input 
               type="text" 
@@ -225,7 +225,7 @@ export default function Chat() {
             />
             <button 
               type="submit"
-              className="bg-blue-600 hover:bg-blue-100 text-slate-900 p-3 rounded-xl transition-colors flex items-center justify-center"
+              className="bg-blue-700 hover:bg-blue-800 text-white p-3 rounded-xl transition-colors flex items-center justify-center"
             >
               <Send className="w-5 h-5" />
             </button>

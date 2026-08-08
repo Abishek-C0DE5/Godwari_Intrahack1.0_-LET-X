@@ -20,8 +20,8 @@ export function Card({
   const displayImage = image || placeholder;
 
   return (
-    <div className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-2xl shadow-sm border border-white/10 overflow-hidden group hover:shadow-md transition-all">
-      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 group">
+    <div className="bg-black/20 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden group hover:-translate-y-1 transition-all">
+      <div className="relative aspect-[4/3] overflow-hidden bg-black/40 group">
         <img 
           src={displayImage} 
           alt={title}
@@ -33,7 +33,7 @@ export function Card({
           className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
         />
           {type === 'guide' && (
-            <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60/90 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-900">
+            <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md border border-white/20 px-2.5 py-1 rounded-lg text-xs font-bold text-white tracking-wider">
               LOCAL GUIDE
             </div>
           )}
@@ -41,9 +41,9 @@ export function Card({
       
       <div className="p-5">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-lg font-bold text-slate-900 leading-tight">{title}</h3>
+          <h3 className="text-lg font-bold text-white leading-tight">{title}</h3>
           {rating && (
-            <div className="flex items-center gap-1 text-sm font-medium text-gray-700 bg-transparent px-2 py-1 rounded-md">
+            <div className="flex items-center gap-1 text-sm font-medium text-gray-200 bg-transparent px-2 py-1 rounded-md">
               <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
               {rating}
             </div>
@@ -51,12 +51,12 @@ export function Card({
         </div>
         
         {subtitle && (
-          <p className="text-slate-500 text-sm mb-3">{subtitle}</p>
+          <p className="text-gray-300 text-sm mb-3">{subtitle}</p>
         )}
         
         {location && (
-          <div className="flex items-center gap-1.5 text-sm text-slate-500 mb-4">
-            <MapPin className="w-4 h-4 text-slate-600" />
+          <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-4">
+            <MapPin className="w-4 h-4 text-gray-400" />
             {location}
           </div>
         )}

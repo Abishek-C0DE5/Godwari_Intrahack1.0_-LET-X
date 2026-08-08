@@ -48,10 +48,10 @@ export default function Register() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-transparent px-6 py-12">
-      <div className="max-w-md w-full bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 p-8 rounded-2xl shadow-sm border border-white/10">
+      <div className="max-w-md w-full bg-black/20 backdrop-blur-md border border-white/20 shadow-xl p-8 rounded-2xl shadow-sm border border-white/10">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">Create an account</h2>
-          <p className="text-sm text-slate-500 mt-2">Join YatraVerse to start exploring.</p>
+          <h2 className="text-2xl font-semibold text-white tracking-tight">Create an account</h2>
+          <p className="text-sm text-gray-300 mt-2">Join YatraVerse to start exploring.</p>
         </div>
 
         {error && (
@@ -62,66 +62,66 @@ export default function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <label className="block text-sm font-medium text-gray-200 mb-1">Full Name</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               placeholder="Enter your name"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-gray-200 mb-1">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               placeholder="Enter your email"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-gray-200 mb-1">Password</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-xl bg-black/20 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               placeholder="Create a password"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">I am a...</label>
+            <label className="block text-sm font-medium text-gray-200 mb-1">I am a...</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60"
+              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-black/20 text-white"
             >
-              <option value="tourist">Tourist</option>
-              <option value="guide">Guide</option>
-              <option value="hotel">Hotel / Restaurant</option>
+              <option value="tourist" className="bg-gray-900 text-white">Tourist</option>
+              <option value="guide" className="bg-gray-900 text-white">Guide</option>
+              <option value="hotel" className="bg-gray-900 text-white">Hotel / Restaurant</option>
             </select>
           </div>
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 text-white shadow-md shadow-blue-500/20 font-medium py-2.5 rounded-xl hover:bg-blue-100 transition-colors disabled:opacity-50 mt-4"
+            className="w-full bg-blue-700 text-white shadow-md shadow-blue-900/50 shadow-xl font-medium py-2.5 rounded-xl hover:bg-blue-800 transition-colors disabled:opacity-50 mt-4"
           >
             {isLoading ? 'Creating account...' : 'Create account'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
+        <p className="mt-6 text-center text-sm text-gray-300">
           Already have an account?{' '}
-          <Link to="/login" className="text-slate-900 font-medium hover:underline">
+          <Link to="/login" className="text-white font-medium hover:underline">
             Sign in
           </Link>
         </p>
