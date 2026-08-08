@@ -18,8 +18,12 @@ export function Navbar() {
       </Link>
       <div className="flex gap-6 text-sm text-gray-600 items-center">
         <Link to="/destinations" className="hover:text-gray-900 transition-colors font-medium">Destinations</Link>
-        <Link to="/guides" className="hover:text-gray-900 transition-colors font-medium">Guides</Link>
-        <Link to="/hotels" className="hover:text-gray-900 transition-colors font-medium">Hotels</Link>
+        {(!profile || profile.role === 'tourist') && (
+          <>
+            <Link to="/guides" className="hover:text-gray-900 transition-colors font-medium">Guides</Link>
+            <Link to="/hotels" className="hover:text-gray-900 transition-colors font-medium">Hotels</Link>
+          </>
+        )}
         
         {user ? (
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
