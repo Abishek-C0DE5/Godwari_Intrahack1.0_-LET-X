@@ -61,6 +61,8 @@ import Hotels from './pages/Hotels';
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
 import Chat from './pages/Chat';
+import GuideJobs from './pages/GuideJobs';
+import HotelLedger from './pages/HotelLedger';
 import AIAssistant from './components/AIAssistant';
 
 function App() {
@@ -107,6 +109,22 @@ function App() {
             
             <Route path="/profile" element={<Profile />} />
             <Route path="/chat" element={<Chat />} />
+            <Route 
+              path="/jobs" 
+              element={
+                <ProtectedRoute allowedRoles={['guide']}>
+                  <GuideJobs />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/reservations" 
+              element={
+                <ProtectedRoute allowedRoles={['hotel']}>
+                  <HotelLedger />
+                </ProtectedRoute>
+              } 
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <AIAssistant />

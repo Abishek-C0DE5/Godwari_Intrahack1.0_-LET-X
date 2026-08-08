@@ -11,17 +11,35 @@ export function Navbar() {
     navigate('/');
   };
 
+  const role = profile?.role || 'tourist'; // Default to tourist if not logged in
+
   return (
     <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full bg-white">
       <Link to="/" className="text-2xl font-bold tracking-tight text-gray-900">
         YatraVerse
       </Link>
       <div className="flex gap-6 text-sm text-gray-600 items-center">
-        <Link to="/destinations" className="hover:text-gray-900 transition-colors font-medium">Destinations</Link>
-        {(!profile || profile.role === 'tourist') && (
+        
+        {/* Dynamic Links Based on Role */}
+        {(!profile || role === 'tourist') && (
           <>
+            <Link to="/destinations" className="hover:text-gray-900 transition-colors font-medium">Destinations</Link>
             <Link to="/guides" className="hover:text-gray-900 transition-colors font-medium">Guides</Link>
             <Link to="/hotels" className="hover:text-gray-900 transition-colors font-medium">Hotels</Link>
+          </>
+        )}
+
+        {role === 'guide' && (
+          <>
+            <Link to="/guide" className="hover:text-gray-900 transition-colors font-medium">My Schedule</Link>
+            <Link to="/jobs" className="hover:text-gray-900 transition-colors font-medium">Job Board</Link>
+          </>
+        )}
+
+        {role === 'hotel' && (
+          <>
+            <Link to="/hotel" className="hover:text-gray-900 transition-colors font-medium">PMS Dashboard</Link>
+            <Link to="/reservations" className="hover:text-gray-900 transition-colors font-medium">Reservations Ledger</Link>
           </>
         )}
         
