@@ -2,33 +2,25 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { LogOut, Save, User, MapPin, Briefcase, DollarSign, Image as ImageIcon, Calendar } from 'lucide-react';
+import { LogOut, CalendarDays, Navigation, MessageSquare, Check, X, Save, Edit3, MapPin, DollarSign, Briefcase } from 'lucide-react';
 
 export default function GuideDashboard() {
   const { profile, logout } = useAuth();
   const navigate = useNavigate();
 
+  const [activeTab, setActiveTab] = useState('schedule');
   const [formData, setFormData] = useState({
-    name: '',
-    location: '',
-    specialties: '',
-    description: '',
-    price: '',
-    avatar_url: ''
+    name: '', location: '', specialties: '', description: '', price: '', avatar_url: ''
   });
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState('');
 
-  // Load existing profile data
   useEffect(() => {
     if (profile) {
       setFormData({
-        name: profile.name || '',
-        location: profile.location || '',
-        specialties: profile.specialties || '',
-        description: profile.description || '',
-        price: profile.price || '',
-        avatar_url: profile.avatar_url || ''
+        name: profile.name || '', location: profile.location || '',
+        specialties: profile.specialties || '', description: profile.description || '',
+        price: profile.price || '', avatar_url: profile.avatar_url || ''
       });
     }
   }, [profile]);
@@ -38,233 +30,205 @@ export default function GuideDashboard() {
     navigate('/login');
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSave = async (e) => {
+  const handleSaveProfile = async (e) => {
     e.preventDefault();
     setIsSaving(true);
-    setMessage('');
-    
-    const { error } = await supabase
-      .from('profiles')
-      .update(formData)
-      .eq('id', profile.id);
-
+    const { error } = await supabase.from('profiles').update(formData).eq('id', profile.id);
     setIsSaving(false);
-    
-    if (error) {
-      setMessage('Error updating profile: ' + error.message);
-    } else {
-      setMessage('Profile updated successfully!');
-      // Hide message after 3 seconds
-      setTimeout(() => setMessage(''), 3000);
-    }
+    setMessage(error ? 'Error updating profile' : 'Profile saved successfully!');
+    setTimeout(() => setMessage(''), 3000);
   };
 
-  // Mock Data for hackathon MVP
-  const mockRequests = [
-    { id: 1, tourist: 'Prakash Sharma', date: 'Aug 12 - Aug 15', details: 'Looking for a 3-day trek and culture tour.', status: 'pending' },
-    { id: 2, tourist: 'Anna Smith', date: 'Sep 05 - Sep 06', details: 'Photography tour of the local temples.', status: 'accepted' },
+  // Mock Freelancer Data
+  const upcomingTours = [
+    { date: 'Aug 10', duration: '3 Days', location: 'Annapurna Base Camp', tourist: 'Prakash Sharma', status: 'upcoming' },
+    { date: 'Aug 15', duration: '1 Day', location: 'Pokhara City Tour', tourist: 'Maya Rai', status: 'upcoming' },
+    { date: 'Aug 22', duration: '5 Days', location: 'Mardi Himal Trek', tourist: 'John Doe', status: 'upcoming' },
+  ];
+
+  const incomingRequests = [
+    { id: 1, tourist: 'Anna Smith', dates: 'Sep 05 - Sep 06', type: 'Photography Tour', details: 'Looking for a 2-day temple tour in Kathmandu.' },
+    { id: 2, tourist: 'David Miller', dates: 'Oct 12 - Oct 25', type: 'Everest Trek', details: 'Need an experienced guide for EBC.' },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full bg-white border-b border-gray-100">
-        <div className="text-xl font-bold tracking-tight text-gray-900">YatraVerse</div>
-        <div className="flex items-center gap-6 text-sm">
-          <span className="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-medium capitalize">
-            {profile?.role} Account
-          </span>
-          <button 
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-gray-500 hover:text-red-600 transition-colors"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
+    <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
+      {/* Top Navbar */}
+      <nav className="bg-white px-6 py-4 flex items-center justify-between sticky top-0 z-10 border-b border-slate-200">
+        <div className="flex items-center gap-8">
+          <div className="text-xl font-bold text-indigo-900 tracking-tight flex items-center gap-2">
+            <Navigation className="w-5 h-5 text-indigo-600" />
+            Guide Portal
+          </div>
+          <div className="hidden md:flex gap-1">
+            <button 
+              onClick={() => setActiveTab('schedule')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'schedule' ? 'bg-indigo-50 text-indigo-700' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'}`}
+            >
+              My Schedule
+            </button>
+            <button 
+              onClick={() => setActiveTab('profile')}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeTab === 'profile' ? 'bg-indigo-50 text-indigo-700' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900'}`}
+            >
+              Public Profile
+            </button>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm">
+            {profile?.name ? profile.name.charAt(0) : 'G'}
+          </div>
+          <button onClick={handleLogout} className="p-2 text-slate-400 hover:text-red-500 transition-colors">
+            <LogOut className="w-5 h-5" />
           </button>
         </div>
       </nav>
 
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-            Welcome, {profile?.name || 'Guide'}
-          </h1>
-          <p className="text-gray-500 mt-1">Manage your professional profile and incoming requests.</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Left Column - Profile Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Your Guide Profile</h2>
-                {message && (
-                  <span className={`text-sm font-medium ${message.includes('Error') ? 'text-red-600' : 'text-green-600'}`}>
-                    {message}
-                  </span>
-                )}
+        
+        {activeTab === 'schedule' && (
+          <>
+            {/* Hero Banner */}
+            <div className="bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl p-8 text-white mb-8 shadow-md relative overflow-hidden">
+              <div className="absolute right-0 top-0 w-64 h-full bg-white opacity-5 transform skew-x-12"></div>
+              <div className="relative z-10 flex flex-col md:flex-row justify-between items-center">
+                <div>
+                  <div className="uppercase tracking-widest text-indigo-200 text-xs font-bold mb-2">Next Upcoming Tour</div>
+                  <h1 className="text-3xl md:text-4xl font-bold mb-2">Annapurna Base Camp</h1>
+                  <div className="text-indigo-100 flex items-center gap-2">
+                    <CalendarDays className="w-4 h-4" /> Starts August 10 (3 Days)
+                  </div>
+                </div>
+                <div className="mt-6 md:mt-0 text-right">
+                  <div className="text-indigo-200 text-sm mb-1">Total Earned This Month</div>
+                  <div className="text-3xl font-bold">NPR 45,000</div>
+                </div>
               </div>
-
-              <form onSubmit={handleSave} className="space-y-5">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Name */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
-                      <User className="w-4 h-4" /> Display Name
-                    </label>
-                    <input 
-                      type="text" 
-                      name="name" 
-                      value={formData.name} 
-                      onChange={handleChange}
-                      className="w-full border-gray-300 rounded-xl px-4 py-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50"
-                      required
-                    />
-                  </div>
-
-                  {/* Location */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
-                      <MapPin className="w-4 h-4" /> Primary Location
-                    </label>
-                    <input 
-                      type="text" 
-                      name="location" 
-                      value={formData.location} 
-                      onChange={handleChange}
-                      placeholder="e.g. Pokhara"
-                      className="w-full border-gray-300 rounded-xl px-4 py-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Specialties */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
-                      <Briefcase className="w-4 h-4" /> Specialties / Services
-                    </label>
-                    <input 
-                      type="text" 
-                      name="specialties" 
-                      value={formData.specialties} 
-                      onChange={handleChange}
-                      placeholder="e.g. Adventure + Hiking"
-                      className="w-full border-gray-300 rounded-xl px-4 py-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50"
-                    />
-                  </div>
-
-                  {/* Price */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
-                      <DollarSign className="w-4 h-4" /> Pricing Rate
-                    </label>
-                    <input 
-                      type="text" 
-                      name="price" 
-                      value={formData.price} 
-                      onChange={handleChange}
-                      placeholder="e.g. NPR 2500/day"
-                      className="w-full border-gray-300 rounded-xl px-4 py-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50"
-                    />
-                  </div>
-                </div>
-
-                {/* Avatar URL */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
-                    <ImageIcon className="w-4 h-4" /> Profile Photo URL
-                  </label>
-                  <input 
-                    type="url" 
-                    name="avatar_url" 
-                    value={formData.avatar_url} 
-                    onChange={handleChange}
-                    placeholder="https://example.com/your-photo.jpg"
-                    className="w-full border-gray-300 rounded-xl px-4 py-2.5 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50"
-                  />
-                </div>
-
-                {/* Description / Experience */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    About Me & Experience
-                  </label>
-                  <textarea 
-                    name="description" 
-                    value={formData.description} 
-                    onChange={handleChange}
-                    rows="4"
-                    placeholder="Describe your experience, areas covered, and languages spoken..."
-                    className="w-full border-gray-300 rounded-xl px-4 py-3 focus:ring-indigo-500 focus:border-indigo-500 bg-gray-50"
-                  ></textarea>
-                </div>
-
-                <div className="pt-2">
-                  <button 
-                    type="submit" 
-                    disabled={isSaving}
-                    className="w-full flex items-center justify-center gap-2 bg-indigo-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-indigo-700 transition-colors disabled:bg-indigo-300"
-                  >
-                    <Save className="w-5 h-5" />
-                    {isSaving ? 'Saving...' : 'Save Profile Updates'}
-                  </button>
-                </div>
-              </form>
             </div>
-          </div>
 
-          {/* Right Column - Tourist Requests (Mock) */}
-          <div className="space-y-6">
-            <div className="bg-gray-900 rounded-3xl p-6 text-white shadow-sm">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white">
-                  <Calendar className="w-5 h-5" />
-                </div>
-                <h2 className="text-xl font-bold">Tourist Requests</h2>
-              </div>
-
-              <div className="space-y-4">
-                {mockRequests.map((req) => (
-                  <div key={req.id} className="bg-white/10 rounded-2xl p-4 border border-white/5">
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="font-semibold text-lg">{req.tourist}</div>
-                      {req.status === 'pending' ? (
-                        <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2.5 py-1 rounded-md font-medium uppercase tracking-wider border border-yellow-500/30">
-                          Pending
-                        </span>
-                      ) : (
-                        <span className="text-xs bg-green-500/20 text-green-300 px-2.5 py-1 rounded-md font-medium uppercase tracking-wider border border-green-500/30">
-                          Accepted
-                        </span>
-                      )}
-                    </div>
-                    <div className="text-sm text-gray-300 mb-1">{req.date}</div>
-                    <div className="text-sm text-gray-400 mb-4">{req.details}</div>
-                    
-                    {req.status === 'pending' && (
-                      <div className="flex gap-2">
-                        <button className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white text-sm font-medium py-2 rounded-lg transition-colors">
-                          Accept
-                        </button>
-                        <button className="flex-1 bg-white/5 hover:bg-white/10 text-white text-sm font-medium py-2 rounded-lg transition-colors">
-                          Message
-                        </button>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Left Column: Tour Calendar */}
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 p-8">
+                  <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                    <CalendarDays className="w-5 h-5 text-indigo-500" /> Upcoming Schedule
+                  </h2>
+                  
+                  <div className="space-y-4">
+                    {upcomingTours.map((tour, i) => (
+                      <div key={i} className="flex flex-col md:flex-row md:items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all group">
+                        <div className="bg-indigo-50 text-indigo-700 font-bold px-4 py-3 rounded-xl text-center min-w-[80px]">
+                          <div className="text-xs uppercase">Date</div>
+                          <div>{tour.date}</div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-bold text-slate-900 text-lg group-hover:text-indigo-700 transition-colors">{tour.location}</h3>
+                          <div className="text-sm text-slate-500 flex items-center gap-3 mt-1">
+                            <span>{tour.duration} Trip</span>
+                            <span className="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span>Client: {tour.tourist}</span>
+                          </div>
+                        </div>
+                        <div>
+                          <button className="text-indigo-600 bg-white border border-indigo-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-indigo-50 transition-colors">
+                            View Itinerary
+                          </button>
+                        </div>
                       </div>
-                    )}
+                    ))}
                   </div>
-                ))}
+                </div>
+              </div>
+
+              {/* Right Column: Job Offers */}
+              <div>
+                <div className="bg-slate-900 rounded-3xl shadow-sm p-6 text-white">
+                  <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
+                    <MessageSquare className="w-5 h-5 text-indigo-400" /> Incoming Requests
+                  </h2>
+                  
+                  <div className="space-y-4">
+                    {incomingRequests.map((req) => (
+                      <div key={req.id} className="bg-white/10 rounded-2xl p-5 border border-white/5 hover:bg-white/20 transition-colors">
+                        <div className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-2">{req.type}</div>
+                        <div className="font-bold text-lg mb-1">{req.tourist}</div>
+                        <div className="text-sm text-slate-300 mb-3">{req.dates}</div>
+                        <p className="text-sm text-slate-400 mb-5 leading-relaxed">{req.details}</p>
+                        
+                        <div className="flex gap-2">
+                          <button className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white flex justify-center items-center py-2.5 rounded-xl transition-colors">
+                            <Check className="w-4 h-4" />
+                          </button>
+                          <button className="flex-1 bg-white/10 hover:bg-red-500/20 hover:text-red-400 text-white flex justify-center items-center py-2.5 rounded-xl transition-colors">
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </>
+        )}
 
-        </div>
+        {activeTab === 'profile' && (
+          <div className="max-w-4xl mx-auto bg-white rounded-3xl p-8 shadow-sm border border-slate-200">
+            <div className="flex items-center gap-4 mb-8 pb-8 border-b border-slate-100">
+              <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                <Edit3 className="w-8 h-8" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900">Guide Profile</h2>
+                <p className="text-slate-500">This information is shown publicly to tourists looking for a guide.</p>
+              </div>
+            </div>
+
+            {message && (
+              <div className="mb-6 p-4 rounded-xl bg-green-50 text-green-700 font-medium">
+                {message}
+              </div>
+            )}
+
+            <form onSubmit={handleSaveProfile} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">Display Name</label>
+                  <input type="text" name="name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-1"><MapPin className="w-4 h-4"/> Base Location</label>
+                  <input type="text" name="location" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none" required />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-1"><Briefcase className="w-4 h-4"/> Specialties</label>
+                  <input type="text" name="specialties" value={formData.specialties} onChange={(e) => setFormData({...formData, specialties: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-1"><DollarSign className="w-4 h-4"/> Daily Rate</label>
+                  <input type="text" name="price" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">About Me (Bio)</label>
+                <textarea name="description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows="5" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+              </div>
+
+              <div className="pt-4 flex justify-end">
+                <button type="submit" disabled={isSaving} className="bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-2">
+                  <Save className="w-5 h-5" />
+                  {isSaving ? 'Saving...' : 'Update Public Profile'}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+
       </main>
     </div>
   );
