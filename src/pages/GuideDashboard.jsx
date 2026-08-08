@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { LogOut, CalendarDays, Navigation, MessageSquare, Check, X, Save, Edit3, MapPin, DollarSign, Briefcase } from 'lucide-react';
+import AIAssistant from '../components/AIAssistant';
 
 export default function GuideDashboard() {
   const { profile, logout } = useAuth();
@@ -141,8 +142,9 @@ export default function GuideDashboard() {
                 </div>
               </div>
 
-              {/* Right Column: Job Offers */}
-              <div>
+              {/* Right Column */}
+              <div className="space-y-8">
+                {/* Job Offers */}
                 <div className="bg-slate-900 rounded-3xl shadow-sm p-6 text-white">
                   <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
                     <MessageSquare className="w-5 h-5 text-indigo-400" /> Incoming Requests
@@ -167,6 +169,11 @@ export default function GuideDashboard() {
                       </div>
                     ))}
                   </div>
+                </div>
+                
+                {/* AI Assistant */}
+                <div className="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                  <AIAssistant />
                 </div>
               </div>
             </div>

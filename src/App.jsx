@@ -21,31 +21,50 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col bg-white">
+    <div className="flex flex-col flex-1 relative bg-gray-900 overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/images/bg.png" 
+          alt="Nepal Tourism Background" 
+          className="w-full h-full object-cover animate-fade-in-up"
+          style={{ animationDuration: '2s' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/40 to-gray-900/90"></div>
+      </div>
+
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-6xl font-semibold text-gray-900 tracking-tight leading-tight mb-6">
-          Explore Nepal. Connect with local people. Travel better.
-        </h1>
-        <p className="text-lg md:text-xl text-gray-500 mb-10 max-w-2xl leading-relaxed">
-          YatraVerse is a clean, simple tourism platform designed to help you discover beautiful destinations and connect with the best local guides.
-        </p>
-        <Link to="/register" className="bg-gray-900 text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm">
-          Start Exploring
-        </Link>
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-4xl mx-auto relative z-10 w-full mt-20">
+        <div className="backdrop-blur-md bg-white/10 p-10 md:p-14 rounded-3xl border border-white/20 shadow-2xl animate-fade-in-up">
+          <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight mb-6 drop-shadow-lg">
+            Explore Nepal.<br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Connect with locals.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-md">
+            YatraVerse is a premium tourism platform designed to help you discover beautiful destinations and connect seamlessly with the best local guides and hotels.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/register" className="bg-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-indigo-500 hover:scale-105 hover:shadow-indigo-500/50 shadow-lg transition-all duration-300">
+              Start Exploring
+            </Link>
+            <Link to="/destinations" className="bg-white/20 backdrop-blur text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white/30 hover:scale-105 transition-all duration-300 border border-white/30">
+              View Destinations
+            </Link>
+          </div>
+        </div>
       </main>
 
       {/* Footer and Status */}
-      <footer className="py-8 text-center text-sm text-gray-400 flex flex-col items-center gap-4 border-t border-gray-100 mt-auto">
-        <div>&copy; {new Date().getFullYear()} YatraVerse. All rights reserved.</div>
+      <footer className="py-6 text-center text-sm text-gray-300 flex flex-col items-center gap-3 relative z-10 bg-black/40 backdrop-blur-sm mt-auto">
+        <div className="font-medium">&copy; {new Date().getFullYear()} YatraVerse. All rights reserved.</div>
         {health ? (
-          <div className="flex items-center gap-2 text-xs text-green-600 bg-green-50 px-3 py-1 rounded-full border border-green-100">
-            <span className="w-2 h-2 rounded-full bg-green-500"></span>
+          <div className="flex items-center gap-2 text-xs text-green-300 bg-green-900/40 px-4 py-1.5 rounded-full border border-green-500/30 backdrop-blur shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
             Backend Connected: {health.status}
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-xs text-gray-500 bg-gray-50 px-3 py-1 rounded-full border border-gray-200">
-            <span className="w-2 h-2 rounded-full bg-gray-400"></span>
+          <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-800/60 px-4 py-1.5 rounded-full border border-gray-600/50 backdrop-blur shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
             Backend Disconnected
           </div>
         )}
@@ -127,7 +146,6 @@ function App() {
             />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-          <AIAssistant />
         </div>
       </BrowserRouter>
     </AuthProvider>

@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { MapPin, Navigation, MessageSquare, Award, Compass } from 'lucide-react';
+import AIAssistant from '../components/AIAssistant';
 
 export default function TouristDashboard() {
   const { profile } = useAuth();
@@ -149,19 +150,9 @@ export default function TouristDashboard() {
             </div>
 
             {/* AI Assistant */}
-            <div className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-4">
-                <MessageSquare className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">AI Travel Assistant</h3>
-              <p className="text-gray-500 text-sm mb-6">
-                Not sure where to go? Ask our smart assistant to plan a personalized trip for you.
-              </p>
-              <button className="w-full bg-indigo-600 text-white font-medium py-2.5 rounded-xl hover:bg-indigo-700 transition-colors">
-                Start Chat (Coming Soon)
-              </button>
+            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+              <AIAssistant />
             </div>
-            
           </div>
         </div>
       </main>

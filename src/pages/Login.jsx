@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
@@ -9,6 +9,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const { login, user, profile } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation(); // To get state messages
 
   useEffect(() => {
     if (user && profile) {
@@ -42,6 +43,12 @@ export default function Login() {
           <h2 className="text-2xl font-semibold text-gray-900 tracking-tight">Welcome back</h2>
           <p className="text-sm text-gray-500 mt-2">Please enter your details to sign in.</p>
         </div>
+
+        {location.state?.message && (
+          <div className="mb-6 p-4 rounded-xl bg-green-50 text-green-700 text-sm border border-green-100 font-medium">
+            {location.state.message}
+          </div>
+        )}
 
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-red-50 text-red-600 text-sm border border-red-100">

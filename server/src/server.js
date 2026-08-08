@@ -33,7 +33,7 @@ app.post('/api/ai/chat', async (req, res) => {
       body: JSON.stringify({
         model: 'mistral-small-latest',
         messages: [
-          { role: 'system', content: 'You are the YatraVerse AI Travel Assistant. You give helpful, concise travel advice about Nepal.' },
+          { role: 'system', content: 'You are the YatraVerse AI Travel Assistant, helping tourists plan trips to Nepal. You must strictly only answer questions related to Nepal tourism, trekking, hotels, guides, and travel. If the user asks anything off-topic, politely refuse to answer and tell them to only talk about what this website is about.' },
           { role: 'user', content: message }
         ]
       })

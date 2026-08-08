@@ -15,8 +15,8 @@ export function Navbar() {
 
   return (
     <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full bg-white">
-      <Link to="/" className="text-2xl font-bold tracking-tight text-gray-900">
-        YatraVerse
+      <Link to="/" className="flex items-center gap-2 text-2xl font-bold tracking-tight text-gray-900 group">
+        <img src="/images/logo.png" alt="YatraVerse Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
       </Link>
       <div className="flex gap-6 text-sm text-gray-600 items-center">
         

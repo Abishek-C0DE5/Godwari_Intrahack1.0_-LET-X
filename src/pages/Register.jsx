@@ -9,7 +9,7 @@ export default function Register() {
   const [role, setRole] = useState('tourist');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { register, user, profile } = useAuth();
+  const { register, logout, user, profile } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +40,10 @@ export default function Register() {
       return;
     }
 
-    // We don't navigate here anymore, the useEffect will handle it once the profile loads
+    // Force sign out so they have to sign in manually as requested
+    await logout();
+    
+    navigate('/login', { state: { message: 'Account created successfully! Please log in to continue.' } });
   };
 
   return (

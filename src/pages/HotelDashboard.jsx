@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { LogOut, BedDouble, CalendarCheck, TrendingUp, Users, CheckCircle, Clock, Save, Settings } from 'lucide-react';
+import AIAssistant from '../components/AIAssistant';
 
 export default function HotelDashboard() {
   const { profile, logout } = useAuth();
@@ -154,8 +155,9 @@ export default function HotelDashboard() {
                 </div>
               </div>
 
-              {/* Right Column: Recent Reservations */}
-              <div>
+              {/* Right Column */}
+              <div className="space-y-8">
+                {/* Recent Reservations */}
                 <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                   <div className="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                     <h2 className="font-bold text-gray-900 text-lg">Recent Reservations</h2>
@@ -187,6 +189,11 @@ export default function HotelDashboard() {
                   <div className="p-4 border-t border-gray-100 bg-gray-50/50 text-center">
                     <button className="text-sm font-semibold text-blue-600 hover:text-blue-700">View All Ledger →</button>
                   </div>
+                </div>
+
+                {/* AI Assistant */}
+                <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                  <AIAssistant />
                 </div>
               </div>
             </div>
