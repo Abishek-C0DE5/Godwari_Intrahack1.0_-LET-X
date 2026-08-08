@@ -17,12 +17,12 @@ export default function Guides() {
       const dbGuides = data && !error ? data : [];
       
       const mockGuides = [
-        { id: 'm1', name: 'Nima Sherpa', specialties: 'High Altitude Trekking, Everest Region', avatar_url: 'https://randomuser.me/api/portraits/men/32.jpg', rating: 4.9, location: 'Namche Bazaar', price: 'NPR 3500/day' },
-        { id: 'm2', name: 'Sita Thapa', specialties: 'Cultural Heritage, Kathmandu Valley', avatar_url: 'https://randomuser.me/api/portraits/women/44.jpg', rating: 4.8, location: 'Kathmandu', price: 'NPR 2500/day' },
-        { id: 'm3', name: 'Bikash Tamang', specialties: 'Wildlife Safari, Bird Watching', avatar_url: 'https://randomuser.me/api/portraits/men/67.jpg', rating: 4.7, location: 'Chitwan', price: 'NPR 3000/day' },
-        { id: 'm4', name: 'Pasang Lhamu', specialties: 'Annapurna Circuit, Mountaineering', avatar_url: 'https://randomuser.me/api/portraits/women/68.jpg', rating: 5.0, location: 'Pokhara', price: 'NPR 4000/day' },
-        { id: 'm5', name: 'Ravi Sharma', specialties: 'Food Tours, History, Photography', avatar_url: 'https://randomuser.me/api/portraits/men/22.jpg', rating: 4.6, location: 'Patan', price: 'NPR 2000/day' },
-        { id: 'm6', name: 'Tenzing Gurung', specialties: 'Mustang Region, Motorbike Tours', avatar_url: 'https://randomuser.me/api/portraits/men/85.jpg', rating: 4.8, location: 'Jomsom', price: 'NPR 4500/day' },
+        { id: 'm1', name: 'Nima Sherpa', specialties: 'High Altitude Trekking, Everest Region', avatar_url: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80', rating: 4.9, location: 'Namche Bazaar', price: 'NPR 3500/day' },
+        { id: 'm2', name: 'Sita Thapa', specialties: 'Cultural Heritage, Kathmandu Valley', avatar_url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80', rating: 4.8, location: 'Kathmandu', price: 'NPR 2500/day' },
+        { id: 'm3', name: 'Bikash Tamang', specialties: 'Wildlife Safari, Bird Watching', avatar_url: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80', rating: 4.7, location: 'Chitwan', price: 'NPR 3000/day' },
+        { id: 'm4', name: 'Pasang Lhamu', specialties: 'Annapurna Circuit, Mountaineering', avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80', rating: 5.0, location: 'Pokhara', price: 'NPR 4000/day' },
+        { id: 'm5', name: 'Ravi Sharma', specialties: 'Food Tours, History, Photography', avatar_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80', rating: 4.6, location: 'Patan', price: 'NPR 2000/day' },
+        { id: 'm6', name: 'Tenzing Gurung', specialties: 'Mustang Region, Motorbike Tours', avatar_url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80', rating: 4.8, location: 'Jomsom', price: 'NPR 4500/day' },
       ];
 
       // Merge database guides with mock guides, avoiding duplicates by name
