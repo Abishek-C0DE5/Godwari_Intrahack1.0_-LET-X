@@ -48,7 +48,7 @@ export default function Destinations() {
   return (
     <div className="max-w-7xl mx-auto w-full px-6 py-12">
       <div className="mb-10 text-center max-w-2xl mx-auto">
-        <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mx-auto mb-4">
+        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mx-auto mb-4">
           <Compass className="w-6 h-6" />
         </div>
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight mb-4">Explore Destinations</h1>
@@ -64,8 +64,8 @@ export default function Destinations() {
               onClick={() => setSelectedTopic(topic)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                 selectedTopic === topic
-                  ? 'bg-indigo-600 text-white shadow-md'
-                  : 'bg-white border border-gray-200 text-gray-600 hover:border-indigo-300 hover:text-indigo-600'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-white border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
               }`}
             >
               {topic}

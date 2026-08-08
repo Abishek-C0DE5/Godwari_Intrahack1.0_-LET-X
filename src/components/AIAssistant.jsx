@@ -41,20 +41,20 @@ export default function AIAssistant() {
   };
 
   return (
-    <div className="bg-white rounded-3xl flex flex-col h-[600px] w-full">
+    <div className="bg-white rounded-2xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] border border-gray-200 flex flex-col h-[320px] w-full">
       {/* Header */}
-      <div className="p-4 bg-indigo-600 text-white flex items-center gap-2">
-        <Sparkles className="w-5 h-5" />
-        <span className="font-semibold">AI Travel Assistant</span>
+      <div className="px-4 py-3 bg-gradient-to-r from-blue-700 to-blue-600 text-white flex items-center gap-2 rounded-t-2xl border-b border-blue-800/50">
+        <Sparkles className="w-4 h-4 text-blue-200" />
+        <span className="font-bold text-sm tracking-wide">AI Travel Assistant</span>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl px-4 py-2 text-[14px] ${
+            <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm font-medium leading-relaxed ${
               msg.role === 'user' 
-                ? 'bg-indigo-600 text-white rounded-br-sm' 
+                ? 'bg-blue-600 text-white rounded-br-sm shadow-md shadow-blue-600/20' 
                 : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm shadow-sm'
             }`}>
               {msg.text}
@@ -73,19 +73,19 @@ export default function AIAssistant() {
       </div>
 
       {/* Input */}
-      <div className="p-3 border-t border-gray-100 bg-white">
+      <div className="p-3 border-t border-gray-100 bg-white rounded-b-2xl">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input 
             type="text" 
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about Nepal tourism..." 
-            className="flex-1 bg-gray-50 border-none rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500"
+            className="flex-1 bg-gray-100 border border-transparent rounded-xl px-4 py-2.5 text-sm font-medium focus:bg-white focus:border-blue-300 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-400"
           />
           <button 
             type="submit"
             disabled={isTyping}
-            className="bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white p-2 rounded-xl transition-colors"
+            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white px-4 py-2.5 rounded-xl transition-all shadow-md shadow-blue-600/20 active:scale-95 flex items-center justify-center"
           >
             <Send className="w-4 h-4" />
           </button>

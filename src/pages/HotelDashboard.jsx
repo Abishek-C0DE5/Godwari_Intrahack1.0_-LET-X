@@ -101,7 +101,7 @@ export default function HotelDashboard() {
                 { label: 'Available Rooms', value: '22', icon: BedDouble, color: 'blue' },
                 { label: 'Today\'s Check-ins', value: '1', icon: CalendarCheck, color: 'green' },
                 { label: 'Pending Requests', value: '2', icon: Clock, color: 'yellow' },
-                { label: 'Monthly Revenue', value: 'NPR 1.2M', icon: TrendingUp, color: 'indigo' },
+                { label: 'Monthly Revenue', value: 'NPR 1.2M', icon: TrendingUp, color: 'blue' },
               ].map((kpi, i) => (
                 <div key={i} className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-4">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-${kpi.color}-50 text-${kpi.color}-600`}>

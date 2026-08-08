@@ -67,7 +67,7 @@ export function Card({
           </div>
           <Link 
             to={linkTo} 
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-700"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700"
           >
             {actionText} →
           </Link>

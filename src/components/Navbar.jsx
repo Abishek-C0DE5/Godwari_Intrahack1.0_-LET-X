@@ -14,9 +14,9 @@ export function Navbar() {
   const role = profile?.role || 'tourist'; // Default to tourist if not logged in
 
   return (
-    <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full bg-white">
+    <nav className="flex items-center justify-between px-8 py-1 max-w-7xl mx-auto w-full bg-white shadow-sm">
       <Link to="/" className="flex items-center gap-2 text-2xl font-bold tracking-tight text-gray-900 group">
-        <img src="/images/logo.png" alt="YatraVerse Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
+        <img src="/images/logo.png" alt="YatraVerse Logo" className="h-10 md:h-12 w-auto group-hover:scale-105 transition-transform duration-300" />
       </Link>
       <div className="flex gap-6 text-sm text-gray-600 items-center">
         
@@ -62,7 +62,7 @@ export function Navbar() {
         ) : (
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
             <Link to="/login" className="hover:text-gray-900 transition-colors font-medium">Sign In</Link>
-            <Link to="/register" className="bg-gray-900 text-white px-5 py-2 rounded-full font-medium hover:bg-gray-800 transition-colors">
+            <Link to="/register" className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition-colors">
               Sign Up
             </Link>
           </div>

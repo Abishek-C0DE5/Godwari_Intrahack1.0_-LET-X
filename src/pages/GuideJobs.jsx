@@ -25,7 +25,7 @@ export default function GuideJobs() {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
-              <Briefcase className="w-8 h-8 text-indigo-600" />
+              <Briefcase className="w-8 h-8 text-blue-600" />
               Public Job Board
             </h1>
             <p className="text-gray-500 mt-2">Browse open requests from tourists looking for a guide like you.</p>
@@ -35,7 +35,7 @@ export default function GuideJobs() {
               <button 
                 key={t}
                 onClick={() => setFilter(t)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${filter === t ? 'bg-indigo-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${filter === t ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
               >
                 {t}
               </button>
@@ -60,7 +60,7 @@ export default function GuideJobs() {
                     {job.status === 'open' ? 'Open Request' : 'Position Filled'}
                   </span>
                   <h2 className="text-xl font-bold text-gray-900">{job.location}</h2>
-                  <p className="text-sm font-medium text-indigo-600">{job.type}</p>
+                  <p className="text-sm font-medium text-blue-600">{job.type}</p>
                 </div>
                 <div className="text-right">
                   <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Budget</div>
@@ -81,11 +81,11 @@ export default function GuideJobs() {
               <div className="pt-4 border-t border-gray-100 mt-auto flex gap-3">
                 <button 
                   disabled={job.status !== 'open'} 
-                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold transition-colors ${job.status === 'open' ? 'bg-indigo-600 text-white hover:bg-indigo-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold transition-colors ${job.status === 'open' ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
                 >
                   <Send className="w-4 h-4" /> Express Interest
                 </button>
-                <Link to="/chat" className={`px-4 py-3 rounded-xl font-bold border transition-colors flex items-center justify-center ${job.status === 'open' ? 'bg-white text-indigo-600 border-indigo-200 hover:bg-indigo-50' : 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed pointer-events-none'}`}>
+                <Link to="/chat" className={`px-4 py-3 rounded-xl font-bold border transition-colors flex items-center justify-center ${job.status === 'open' ? 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50' : 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed pointer-events-none'}`}>
                   Message
                 </Link>
               </div>

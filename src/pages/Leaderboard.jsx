@@ -49,7 +49,7 @@ export default function Leaderboard() {
             {leaders.map((user, index) => (
               <div 
                 key={index} 
-                className={`flex items-center justify-between p-6 transition-colors hover:bg-gray-50 ${index < 3 ? 'bg-indigo-50/30' : ''}`}
+                className={`flex items-center justify-between p-6 transition-colors hover:bg-gray-50 ${index < 3 ? 'bg-blue-50/30' : ''}`}
               >
                 <div className="flex items-center gap-6">
                   <div className={`w-10 text-center font-bold text-lg ${
@@ -71,7 +71,7 @@ export default function Leaderboard() {
                 </div>
                 
                 <div className="text-right">
-                  <div className="font-bold text-indigo-600 text-xl">{user.points?.toLocaleString() || 0}</div>
+                  <div className="font-bold text-blue-600 text-xl">{user.points?.toLocaleString() || 0}</div>
                   <div className="text-xs font-medium text-gray-500 uppercase tracking-wider">Points</div>
                 </div>
               </div>

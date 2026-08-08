@@ -152,7 +152,7 @@ export default function Chat() {
             <input 
               type="text" 
               placeholder="Search conversations..." 
-              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border-none rounded-xl focus:ring-indigo-500"
+              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border-none rounded-xl focus:ring-blue-500"
             />
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function Chat() {
             <div 
               key={chat.id}
               onClick={() => setActiveChat(chat)}
-              className={`p-4 border-b border-gray-50 flex items-center gap-4 cursor-pointer hover:bg-gray-50 transition-colors ${activeChat.id === chat.id ? 'bg-indigo-50/50' : ''}`}
+              className={`p-4 border-b border-gray-50 flex items-center gap-4 cursor-pointer hover:bg-gray-50 transition-colors ${activeChat.id === chat.id ? 'bg-blue-50/50' : ''}`}
             >
               <div className="relative">
                 <img src={chat.avatar} alt={chat.name} className="w-12 h-12 rounded-full object-cover" />
@@ -187,7 +187,7 @@ export default function Chat() {
               <h2 className="font-bold text-gray-900 flex items-center gap-2">
                 {activeChat.name}
                 <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold ${
-                  activeChat.type === 'guide' ? 'bg-indigo-50 text-indigo-700' :
+                  activeChat.type === 'guide' ? 'bg-blue-50 text-blue-700' :
                   activeChat.type === 'hotel' ? 'bg-blue-50 text-blue-700' : 'bg-green-50 text-green-700'
                 }`}>
                   {activeChat.type}
@@ -202,11 +202,11 @@ export default function Chat() {
             <div key={msg.id} className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[70%] rounded-2xl px-5 py-3 ${
                 msg.sender === 'me' 
-                  ? 'bg-indigo-600 text-white rounded-br-sm' 
+                  ? 'bg-blue-600 text-white rounded-br-sm' 
                   : 'bg-white border border-gray-100 text-gray-900 rounded-bl-sm shadow-sm'
               }`}>
                 <p className="text-[15px]">{msg.text}</p>
-                <span className={`text-[10px] mt-1 block ${msg.sender === 'me' ? 'text-indigo-200' : 'text-gray-400'}`}>
+                <span className={`text-[10px] mt-1 block ${msg.sender === 'me' ? 'text-blue-200' : 'text-gray-400'}`}>
                   {msg.time}
                 </span>
               </div>
@@ -221,11 +221,11 @@ export default function Chat() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your message..." 
-              className="flex-1 bg-gray-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 bg-gray-50 border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500"
             />
             <button 
               type="submit"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl transition-colors flex items-center justify-center"
+              className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-xl transition-colors flex items-center justify-center"
             >
               <Send className="w-5 h-5" />
             </button>

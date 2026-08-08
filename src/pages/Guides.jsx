@@ -43,7 +43,7 @@ export default function Guides() {
   return (
     <div className="max-w-7xl mx-auto w-full px-6 py-12">
       <div className="mb-10 text-center max-w-2xl mx-auto animate-fade-in-up">
-        <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 mx-auto mb-4">
+        <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 mx-auto mb-4">
           <Users className="w-6 h-6" />
         </div>
         <h1 className="text-4xl font-bold text-gray-900 tracking-tight mb-4">Local Guides</h1>

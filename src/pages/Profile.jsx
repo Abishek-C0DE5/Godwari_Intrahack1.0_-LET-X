@@ -54,7 +54,7 @@ function TouristProfile({ user, profile }) {
     <div className="space-y-8">
       <div className="mb-4">
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
-          <Globe className="w-8 h-8 text-indigo-600" />
+          <Globe className="w-8 h-8 text-blue-600" />
           Explorer Hub
         </h1>
         <p className="text-gray-500 mt-1">Manage your traveler identity and preferences.</p>
@@ -62,21 +62,21 @@ function TouristProfile({ user, profile }) {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-1 space-y-6">
-          <div className="bg-indigo-600 text-white rounded-3xl p-8 shadow-md relative overflow-hidden">
+          <div className="bg-blue-600 text-white rounded-3xl p-8 shadow-md relative overflow-hidden">
             <div className="absolute -right-4 -bottom-4 opacity-10"><Award className="w-40 h-40" /></div>
             <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-white mb-6 backdrop-blur-sm">
               <User className="w-8 h-8" />
             </div>
             <h2 className="text-2xl font-bold mb-1 relative z-10">{profile.name}</h2>
-            <h3 className="font-medium text-indigo-200 mb-6 relative z-10 uppercase tracking-widest text-xs">YatraVerse Explorer</h3>
+            <h3 className="font-medium text-blue-200 mb-6 relative z-10 uppercase tracking-widest text-xs">YatraVerse Explorer</h3>
             
-            <div className="flex justify-between items-end relative z-10 pt-6 border-t border-indigo-500/50">
+            <div className="flex justify-between items-end relative z-10 pt-6 border-t border-blue-500/50">
               <div>
-                <div className="text-xs text-indigo-200 uppercase tracking-wider mb-1">Total Points</div>
+                <div className="text-xs text-blue-200 uppercase tracking-wider mb-1">Total Points</div>
                 <div className="text-3xl font-black">{profile.points?.toLocaleString() || 0}</div>
               </div>
               <div className="text-right">
-                <div className="text-xs text-indigo-200 uppercase tracking-wider mb-1">Global Rank</div>
+                <div className="text-xs text-blue-200 uppercase tracking-wider mb-1">Global Rank</div>
                 <div className="text-3xl font-black">#{rank || '-'}</div>
               </div>
             </div>
@@ -107,7 +107,7 @@ function TouristProfile({ user, profile }) {
             <form onSubmit={handleSave} className="space-y-5">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Display Name</label>
-                <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500" placeholder="Enter your name" />
+                <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" />
               </div>
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
@@ -116,7 +116,7 @@ function TouristProfile({ user, profile }) {
               </div>
               {message && <div className="p-3 rounded-xl bg-green-50 text-green-700 text-sm font-medium">{message}</div>}
               <div className="pt-2">
-                <button type="submit" disabled={isSaving} className="flex items-center gap-2 bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-indigo-700 transition-colors disabled:bg-indigo-300">
+                <button type="submit" disabled={isSaving} className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors disabled:bg-blue-300">
                   <Save className="w-5 h-5" /> {isSaving ? 'Saving...' : 'Save Profile'}
                 </button>
               </div>
@@ -129,7 +129,7 @@ function TouristProfile({ user, profile }) {
             </h2>
             <div className="flex flex-wrap gap-3">
               {['Trekking', 'Cultural Heritage', 'Photography', 'Wildlife Safari', 'Local Cuisine', 'Homestays'].map(tag => (
-                <span key={tag} className="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 cursor-pointer hover:bg-indigo-50 hover:text-indigo-600 hover:border-indigo-200 transition-colors shadow-sm">
+                <span key={tag} className="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 cursor-pointer hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm">
                   {tag}
                 </span>
               ))}
@@ -163,7 +163,7 @@ function GuideProfile({ user, profile }) {
     <div className="space-y-8">
       <div className="mb-4">
         <h1 className="text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
-          <Camera className="w-8 h-8 text-indigo-600" />
+          <Camera className="w-8 h-8 text-blue-600" />
           Portfolio Manager
         </h1>
         <p className="text-gray-500 mt-1">Design how tourists see you on the platform.</p>
@@ -193,7 +193,7 @@ function GuideProfile({ user, profile }) {
                   <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" /> 5.0
                 </div>
               </div>
-              <p className="text-indigo-600 font-medium text-sm mb-4">{formData.specialties || 'Your Specialties'}</p>
+              <p className="text-blue-600 font-medium text-sm mb-4">{formData.specialties || 'Your Specialties'}</p>
               <div className="flex items-center gap-2 text-sm text-gray-500 mb-6 font-medium">
                 <MapPin className="w-4 h-4 text-gray-400" /> {formData.location || 'Your Location'}
               </div>
@@ -214,31 +214,31 @@ function GuideProfile({ user, profile }) {
               <div className="grid grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Display Name</label>
-                  <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 font-medium" />
+                  <input type="text" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 font-medium" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Base Location</label>
-                  <input type="text" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 font-medium" />
+                  <input type="text" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 font-medium" />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Specialties / Tags</label>
-                <input type="text" value={formData.specialties} onChange={(e) => setFormData({...formData, specialties: e.target.value})} placeholder="e.g. Hiking, History, Food" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 font-medium" />
+                <input type="text" value={formData.specialties} onChange={(e) => setFormData({...formData, specialties: e.target.value})} placeholder="e.g. Hiking, History, Food" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 font-medium" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Daily Rate</label>
-                <input type="text" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} placeholder="e.g. NPR 2500/day" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 font-medium" />
+                <input type="text" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} placeholder="e.g. NPR 2500/day" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 font-medium" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Profile Photo URL</label>
-                <input type="url" value={formData.avatar_url} onChange={(e) => setFormData({...formData, avatar_url: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 font-medium" />
+                <input type="url" value={formData.avatar_url} onChange={(e) => setFormData({...formData, avatar_url: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 font-medium" />
               </div>
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Full Bio</label>
-                <textarea value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows="4" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-indigo-500 font-medium"></textarea>
+                <textarea value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows="4" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 font-medium"></textarea>
               </div>
               <div className="pt-4">
-                <button type="submit" disabled={isSaving} className="w-full bg-indigo-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-indigo-800 transition-colors flex items-center justify-center gap-2 shadow-sm">
+                <button type="submit" disabled={isSaving} className="w-full bg-blue-900 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-800 transition-colors flex items-center justify-center gap-2 shadow-sm">
                   <Save className="w-5 h-5" /> {isSaving ? 'Updating...' : 'Publish Profile Updates'}
                 </button>
               </div>

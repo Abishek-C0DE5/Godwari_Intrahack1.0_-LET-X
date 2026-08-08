@@ -30,24 +30,24 @@ function Home() {
           className="w-full h-full object-cover animate-fade-in-up"
           style={{ animationDuration: '2s' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/60 via-gray-900/40 to-gray-900/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/30 via-transparent to-gray-900/60"></div>
       </div>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-4xl mx-auto relative z-10 w-full mt-20">
-        <div className="backdrop-blur-md bg-white/10 p-10 md:p-14 rounded-3xl border border-white/20 shadow-2xl animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight leading-tight mb-6 drop-shadow-lg">
+      <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-5xl mx-auto relative z-10 w-full mt-10">
+        <div className="animate-fade-in-up">
+          <h1 className="text-6xl md:text-8xl font-black text-white tracking-tight leading-[1.1] mb-8 drop-shadow-2xl">
             Explore Nepal.<br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Connect with locals.</span>
+            <span className="text-white drop-shadow-xl">Connect with locals.</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-md">
-            YatraVerse is a premium tourism platform designed to help you discover beautiful destinations and connect seamlessly with the best local guides and hotels.
+          <p className="text-xl md:text-2xl text-gray-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg shadow-black">
+            Experience the Himalayas like never before. Discover breathtaking destinations, book expert local guides, and find the perfect stay.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/register" className="bg-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-indigo-500 hover:scale-105 hover:shadow-indigo-500/50 shadow-lg transition-all duration-300">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Link to="/register" className="bg-blue-600 text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-blue-700 hover:scale-105 shadow-[0_0_40px_rgba(37,99,235,0.4)] transition-all duration-300">
               Start Exploring
             </Link>
-            <Link to="/destinations" className="bg-white/20 backdrop-blur text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-white/30 hover:scale-105 transition-all duration-300 border border-white/30">
+            <Link to="/destinations" className="text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-white/10 hover:scale-105 transition-all duration-300 border-2 border-white/50 backdrop-blur-sm shadow-xl">
               View Destinations
             </Link>
           </div>
@@ -57,17 +57,6 @@ function Home() {
       {/* Footer and Status */}
       <footer className="py-6 text-center text-sm text-gray-300 flex flex-col items-center gap-3 relative z-10 bg-black/40 backdrop-blur-sm mt-auto">
         <div className="font-medium">&copy; {new Date().getFullYear()} YatraVerse. All rights reserved.</div>
-        {health ? (
-          <div className="flex items-center gap-2 text-xs text-green-300 bg-green-900/40 px-4 py-1.5 rounded-full border border-green-500/30 backdrop-blur shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-            Backend Connected: {health.status}
-          </div>
-        ) : (
-          <div className="flex items-center gap-2 text-xs text-gray-400 bg-gray-800/60 px-4 py-1.5 rounded-full border border-gray-600/50 backdrop-blur shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
-            Backend Disconnected
-          </div>
-        )}
       </footer>
     </div>
   );
