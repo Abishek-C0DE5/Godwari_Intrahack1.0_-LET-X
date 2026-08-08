@@ -17,12 +17,12 @@ export default function Hotels() {
       const dbHotels = data && !error ? data : [];
       
       const mockHotels = [
-        { id: 'h1', name: 'Kathmandu Heritage Resort', description: 'Luxury Heritage Stay', avatar_url: 'https://picsum.photos/seed/KtmResort/600/400', rating: 4.8, location: 'Thamel, Kathmandu', price: 'NPR 12000/night' },
-        { id: 'h2', name: 'Pokhara Lakeside Inn', description: 'Lakeview Balconies & Spa', avatar_url: 'https://picsum.photos/seed/LakesideInn/600/400', rating: 4.6, location: 'Lakeside, Pokhara', price: 'NPR 8500/night' },
-        { id: 'h3', name: 'Chitwan Jungle Lodge', description: 'Eco-friendly Safari Resort', avatar_url: 'https://picsum.photos/seed/ChitwanLodge/600/400', rating: 4.9, location: 'Sauraha, Chitwan', price: 'NPR 15000/night' },
-        { id: 'h4', name: 'Namche Everest View', description: 'Highest Altitude Comfort', avatar_url: 'https://picsum.photos/seed/EverestView/600/400', rating: 4.7, location: 'Namche Bazaar', price: 'NPR 25000/night' },
-        { id: 'h5', name: 'Lumbini Peace Garden', description: 'Tranquil Meditation Retreat', avatar_url: 'https://picsum.photos/seed/LumbiniGarden/600/400', rating: 4.5, location: 'Lumbini', price: 'NPR 5000/night' },
-        { id: 'h6', name: 'Bhaktapur Guest House', description: 'Authentic Newari Architecture', avatar_url: 'https://picsum.photos/seed/Bhaktapur/600/400', rating: 4.6, location: 'Bhaktapur Durbar', price: 'NPR 4500/night' },
+        { id: 'h1', name: 'Kathmandu Heritage Resort', description: 'Luxury Heritage Stay', avatar_url: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80', rating: 4.8, location: 'Thamel, Kathmandu', price: 'NPR 12000/night' },
+        { id: 'h2', name: 'Pokhara Lakeside Inn', description: 'Lakeview Balconies & Spa', avatar_url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80', rating: 4.6, location: 'Lakeside, Pokhara', price: 'NPR 8500/night' },
+        { id: 'h3', name: 'Chitwan Jungle Lodge', description: 'Eco-friendly Safari Resort', avatar_url: 'https://images.unsplash.com/photo-1542314831-c6a4d14d8373?auto=format&fit=crop&w=600&q=80', rating: 4.9, location: 'Sauraha, Chitwan', price: 'NPR 15000/night' },
+        { id: 'h4', name: 'Namche Everest View', description: 'Highest Altitude Comfort', avatar_url: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=600&q=80', rating: 4.7, location: 'Namche Bazaar', price: 'NPR 25000/night' },
+        { id: 'h5', name: 'Lumbini Peace Garden', description: 'Tranquil Meditation Retreat', avatar_url: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=600&q=80', rating: 4.5, location: 'Lumbini', price: 'NPR 5000/night' },
+        { id: 'h6', name: 'Bhaktapur Guest House', description: 'Authentic Newari Architecture', avatar_url: 'https://images.unsplash.com/photo-1551882547-ff40c0d5bf8f?auto=format&fit=crop&w=600&q=80', rating: 4.6, location: 'Bhaktapur Durbar', price: 'NPR 4500/night' },
       ];
 
       // Merge database hotels with mock hotels, avoiding duplicates by name
