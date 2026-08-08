@@ -49,7 +49,7 @@ export default function Guides() {
               type="guide"
               title={guide.name}
               subtitle={guide.specialties || 'General Tourism'}
-              image={guide.avatar_url || 'https://images.unsplash.com/photo-1544168190-79c15427008f?auto=format&fit=crop&q=80'}
+              image={guide.avatar_url}
               rating={guide.rating}
               location={guide.location}
               price={guide.price}

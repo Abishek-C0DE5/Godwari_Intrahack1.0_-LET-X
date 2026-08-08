@@ -49,7 +49,7 @@ export default function Hotels() {
               type="hotel"
               title={hotel.name}
               subtitle={hotel.description || 'Accommodation'}
-              image={hotel.avatar_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80'}
+              image={hotel.avatar_url}
               rating={hotel.rating}
               location={hotel.location}
               price={hotel.price}

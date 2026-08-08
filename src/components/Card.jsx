@@ -13,27 +13,30 @@ export function Card({
   linkTo,
   actionText = "View Details"
 }) {
+  const placeholder = type === 'guide' 
+    ? `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&size=400`
+    : `https://picsum.photos/seed/${encodeURIComponent(title)}/400/300`;
+    
+  const displayImage = image || placeholder;
+
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all">
-      {image && (
-        <div className="aspect-[4/3] overflow-hidden relative">
-          <img 
-            src={image} 
-            alt={title} 
-            onError={(e) => {
-              e.target.onerror = null;
-              const placeholder = `https://picsum.photos/seed/${encodeURIComponent(title)}/400/300`;
-              e.target.src = placeholder;
-            }}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
+      <div className="aspect-[4/3] overflow-hidden relative">
+        <img 
+          src={displayImage} 
+          alt={title} 
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = placeholder;
+          }}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
           {type === 'guide' && (
             <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-2.5 py-1 rounded-lg text-xs font-semibold text-gray-900">
               LOCAL GUIDE
             </div>
           )}
         </div>
-      )}
       
       <div className="p-5">
         <div className="flex justify-between items-start mb-2">

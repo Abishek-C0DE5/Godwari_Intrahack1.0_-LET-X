@@ -13,8 +13,7 @@ export default function Chat() {
       type: 'guide',
       lastMessage: 'I can take you to the peace pagoda.',
       time: '10:30 AM',
-      unread: 2,
-      avatar: 'https://images.unsplash.com/photo-1544168190-79c15427008f?auto=format&fit=crop&q=80'
+      avatar: 'https://ui-avatars.com/api/?name=Ram+Gurung&background=random&size=150'
     },
     {
       id: 2,
@@ -23,7 +22,7 @@ export default function Chat() {
       lastMessage: 'Yes, we have a deluxe room available for those dates.',
       time: 'Yesterday',
       unread: 0,
-      avatar: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80'
+      avatar: 'https://picsum.photos/seed/HotelHimalayan/150/150'
     }
   ];
 
