@@ -18,24 +18,24 @@ export default function GuideJobs() {
   const filteredJobs = filter === 'All' ? jobs : jobs.filter(j => j.type === filter);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+    <div className="min-h-screen bg-transparent flex flex-col font-sans">
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight flex items-center gap-3">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
               <Briefcase className="w-8 h-8 text-blue-600" />
               Public Job Board
             </h1>
-            <p className="text-gray-500 mt-2">Browse open requests from tourists looking for a guide like you.</p>
+            <p className="text-slate-500 mt-2">Browse open requests from tourists looking for a guide like you.</p>
           </div>
           <div className="flex gap-2">
             {['All', 'Trekking', 'Cultural Heritage', 'Wildlife Safari'].map(t => (
               <button 
                 key={t}
                 onClick={() => setFilter(t)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${filter === t ? 'bg-blue-600 text-white' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'}`}
+                className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${filter === t ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' : 'bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 text-slate-600 border border-white/10 hover:bg-transparent'}`}
               >
                 {t}
               </button>
@@ -44,48 +44,48 @@ export default function GuideJobs() {
         </div>
 
         {/* Search Bar */}
-        <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-8 flex gap-4 items-center">
-          <Search className="w-5 h-5 text-gray-400 ml-2" />
-          <input type="text" placeholder="Search by location, keyword, or tourist name..." className="flex-1 bg-transparent border-none focus:ring-0 text-gray-900 placeholder-gray-400" />
-          <button className="bg-gray-100 p-2 rounded-xl text-gray-600 hover:bg-gray-200 transition-colors"><Filter className="w-5 h-5" /></button>
+        <div className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 p-4 rounded-2xl shadow-sm border border-white/10 mb-8 flex gap-4 items-center">
+          <Search className="w-5 h-5 text-slate-600 ml-2" />
+          <input type="text" placeholder="Search by location, keyword, or tourist name..." className="flex-1 bg-transparent border-none focus:ring-0 text-slate-900 placeholder-gray-400" />
+          <button className="bg-gray-100 p-2 rounded-xl text-slate-600 hover:bg-gray-200 transition-colors"><Filter className="w-5 h-5" /></button>
         </div>
 
         {/* Job Listings */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {filteredJobs.map(job => (
-            <div key={job.id} className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow flex flex-col">
+            <div key={job.id} className="bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 rounded-3xl p-6 shadow-sm border border-white/10 hover:shadow-md transition-shadow flex flex-col">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 ${job.status === 'open' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 ${job.status === 'open' ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-slate-500'}`}>
                     {job.status === 'open' ? 'Open Request' : 'Position Filled'}
                   </span>
-                  <h2 className="text-xl font-bold text-gray-900">{job.location}</h2>
+                  <h2 className="text-xl font-bold text-slate-900">{job.location}</h2>
                   <p className="text-sm font-medium text-blue-600">{job.type}</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Budget</div>
-                  <div className="text-lg font-bold text-gray-900">{job.budget}</div>
+                  <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Budget</div>
+                  <div className="text-lg font-bold text-slate-900">{job.budget}</div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4 bg-gray-50 p-4 rounded-2xl border border-gray-100">
-                <div className="flex items-center gap-1.5 w-full md:w-auto"><Calendar className="w-4 h-4 text-gray-400"/> {job.dates}</div>
-                <div className="flex items-center gap-1.5 w-full md:w-auto"><UserIcon className="w-4 h-4 text-gray-400"/> {job.tourist}</div>
-                <div className="flex items-center gap-1.5 w-full md:w-auto"><Clock className="w-4 h-4 text-gray-400"/> Posted 2 days ago</div>
+              <div className="flex flex-wrap gap-4 text-sm text-slate-600 mb-4 bg-transparent p-4 rounded-2xl border border-white/10">
+                <div className="flex items-center gap-1.5 w-full md:w-auto"><Calendar className="w-4 h-4 text-slate-600"/> {job.dates}</div>
+                <div className="flex items-center gap-1.5 w-full md:w-auto"><UserIcon className="w-4 h-4 text-slate-600"/> {job.tourist}</div>
+                <div className="flex items-center gap-1.5 w-full md:w-auto"><Clock className="w-4 h-4 text-slate-600"/> Posted 2 days ago</div>
               </div>
 
-              <p className="text-gray-600 text-sm leading-relaxed flex-1 mb-6">
+              <p className="text-slate-600 text-sm leading-relaxed flex-1 mb-6">
                 "{job.details}"
               </p>
 
-              <div className="pt-4 border-t border-gray-100 mt-auto flex gap-3">
+              <div className="pt-4 border-t border-white/10 mt-auto flex gap-3">
                 <button 
                   disabled={job.status !== 'open'} 
-                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold transition-colors ${job.status === 'open' ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
+                  className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-bold transition-colors ${job.status === 'open' ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20 hover:bg-blue-100' : 'bg-gray-100 text-slate-600 cursor-not-allowed'}`}
                 >
                   <Send className="w-4 h-4" /> Express Interest
                 </button>
-                <Link to="/chat" className={`px-4 py-3 rounded-xl font-bold border transition-colors flex items-center justify-center ${job.status === 'open' ? 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50' : 'bg-gray-50 text-gray-400 border-gray-200 cursor-not-allowed pointer-events-none'}`}>
+                <Link to="/chat" className={`px-4 py-3 rounded-xl font-bold border transition-colors flex items-center justify-center ${job.status === 'open' ? 'bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 text-blue-600 border-blue-200 hover:bg-blue-50' : 'bg-transparent text-slate-600 border-white/10 cursor-not-allowed pointer-events-none'}`}>
                   Message
                 </Link>
               </div>

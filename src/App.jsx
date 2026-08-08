@@ -40,7 +40,7 @@ function Home() {
             Explore Nepal.<br/>
             <span className="text-white drop-shadow-xl">Connect with locals.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-100 mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg shadow-black">
+          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed font-medium drop-shadow-lg shadow-black">
             Experience the Himalayas like never before. Discover breathtaking destinations, book expert local guides, and find the perfect stay.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -77,7 +77,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-gray-50">
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-100 via-white to-blue-50 text-slate-900">
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />

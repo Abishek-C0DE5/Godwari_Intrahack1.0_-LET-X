@@ -37,11 +37,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-6 py-12">
-      <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-transparent px-6 py-12">
+      <div className="max-w-md w-full bg-white/80 backdrop-blur-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/60 p-8 rounded-2xl shadow-sm border border-white/10">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold text-gray-900 tracking-tight">Welcome back</h2>
-          <p className="text-sm text-gray-500 mt-2">Please enter your details to sign in.</p>
+          <h2 className="text-2xl font-semibold text-slate-900 tracking-tight">Welcome back</h2>
+          <p className="text-sm text-slate-500 mt-2">Please enter your details to sign in.</p>
         </div>
 
         {location.state?.message && (
@@ -64,7 +64,7 @@ export default function Login() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
               placeholder="Enter your email"
             />
           </div>
@@ -76,7 +76,7 @@ export default function Login() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all"
               placeholder="Enter your password"
             />
           </div>
@@ -84,15 +84,15 @@ export default function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 text-white font-medium py-2.5 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 mt-4"
+            className="w-full bg-blue-600 text-white shadow-md shadow-blue-500/20 font-medium py-2.5 rounded-xl hover:bg-blue-100 transition-colors disabled:opacity-50 mt-4"
           >
             {isLoading ? 'Signing in...' : 'Sign in'}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-gray-500">
+        <p className="mt-6 text-center text-sm text-slate-500">
           Don't have an account?{' '}
-          <Link to="/register" className="text-gray-900 font-medium hover:underline">
+          <Link to="/register" className="text-slate-900 font-medium hover:underline">
             Register
           </Link>
         </p>

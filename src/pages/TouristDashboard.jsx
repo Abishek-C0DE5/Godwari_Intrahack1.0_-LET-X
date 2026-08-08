@@ -53,27 +53,27 @@ export default function TouristDashboard() {
   }, [profile]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="bg-transparent flex flex-col text-slate-900">
       <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-8">
         
         {/* Header Section */}
         <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+            <h1 className="text-3xl font-bold tracking-tight text-slate-900">
               Welcome, {profile?.name || 'Explorer'}
             </h1>
-            <p className="text-gray-500 mt-1">Ready for your next adventure?</p>
+            <p className="text-slate-500 mt-1 font-medium">Ready for your next adventure?</p>
           </div>
           <div className="flex gap-4">
-            <Link to="/leaderboard" className="bg-white px-5 py-3 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-3 hover:border-blue-200 hover:shadow-md transition-all group">
-              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:bg-blue-100 transition-colors">
+            <Link to="/leaderboard" className="bg-white/90 backdrop-blur-sm px-5 py-3 rounded-2xl shadow-lg border border-white/10 flex items-center gap-3 hover:border-blue-500 hover:bg-blue-800/60 transition-all group">
+              <div className="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center text-slate-900 group-hover:bg-blue-100 transition-colors shadow-inner">
                 <Award className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-xs text-gray-500 font-medium uppercase tracking-wider">Your Points</div>
-                <div className="font-bold text-gray-900 leading-tight">
+                <div className="text-xs text-slate-500 font-medium uppercase tracking-wider">Your Points</div>
+                <div className="font-bold text-slate-900 leading-tight">
                   {profile?.points?.toLocaleString() || 0} 
-                  <span className="text-sm font-medium text-blue-600 ml-2">Rank #{rank || '-'} →</span>
+                  <span className="text-sm font-medium text-slate-500 ml-2">Rank #{rank || '-'} →</span>
                 </div>
               </div>
             </Link>
@@ -86,17 +86,17 @@ export default function TouristDashboard() {
           <div className="lg:col-span-2 space-y-8">
             
             {/* Explore Section */}
-            <section className="bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+            <section className="bg-blue-900/30 backdrop-blur-xl border-blue-400/20 p-6 rounded-3xl shadow-xl border border-white/10">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                  <Compass className="w-5 h-5 text-blue-500" /> Explore Destinations
+                <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <Compass className="w-5 h-5 text-blue-400" /> Explore Destinations
                 </h2>
-                <Link to="/destinations" className="text-sm font-medium text-blue-600 hover:text-blue-700">View All 15+ Places →</Link>
+                <Link to="/destinations" className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">View All 15+ Places →</Link>
               </div>
               
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {destinations.map(dest => (
-                  <Link to={`/destinations/${dest.id}`} key={dest.name} className="group block relative overflow-hidden rounded-2xl aspect-[4/3]">
+                  <Link to={`/destinations/${dest.id}`} key={dest.name} className="group block relative overflow-hidden rounded-2xl aspect-[4/3] border border-white/10 shadow-lg">
                     <img 
                       src={dest.image_url} 
                       alt={dest.name} 
@@ -107,9 +107,9 @@ export default function TouristDashboard() {
                       }}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-950/90 via-blue-950/30 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <span className="text-white font-medium flex items-center gap-1.5">
+                      <span className="text-slate-900 font-medium flex items-center gap-1.5 drop-shadow-md">
                         <MapPin className="w-3.5 h-3.5" /> {dest.name}
                       </span>
                     </div>
@@ -124,25 +124,25 @@ export default function TouristDashboard() {
           <div className="space-y-6">
             
             {/* Upcoming Trip */}
-            <div className="bg-gray-900 text-white p-6 rounded-3xl shadow-sm relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-10">
+            <div className="bg-blue-900/60 backdrop-blur-sm text-slate-900 p-6 rounded-3xl shadow-xl border border-slate-200/60 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-20">
                 <Navigation className="w-24 h-24" />
               </div>
-              <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-4 relative z-10">Upcoming Trip</h3>
+              <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4 relative z-10">Upcoming Trip</h3>
               
               {trips.length > 0 ? (
                 <div className="relative z-10">
                   <div className="text-2xl font-bold mb-1">{trips[0].title}</div>
-                  <div className="text-gray-300 mb-6">{trips[0].destinations?.name} — {trips[0].days} Days Experience</div>
-                  <Link to={`/destinations/${trips[0].destination_id}`} className="inline-flex items-center justify-center w-full bg-white text-gray-900 font-medium py-2.5 rounded-xl hover:bg-gray-100 transition-colors">
+                  <div className="text-slate-500 mb-6 font-medium">{trips[0].destinations?.name} — {trips[0].days} Days Experience</div>
+                  <Link to={`/destinations/${trips[0].destination_id}`} className="inline-flex items-center justify-center w-full bg-blue-600 text-white shadow-md shadow-blue-500/20 font-bold py-3 rounded-xl hover:bg-blue-50 hover:scale-[1.02] transition-all shadow-lg">
                     View Destination Details
                   </Link>
                 </div>
               ) : (
                 <div className="relative z-10">
-                  <div className="text-xl font-medium mb-2">No trips booked yet</div>
-                  <div className="text-gray-400 text-sm mb-6">Find a destination and book a local guide to start your journey.</div>
-                  <Link to="/destinations" className="inline-flex items-center justify-center w-full bg-blue-500 text-white font-medium py-2.5 rounded-xl hover:bg-blue-600 transition-colors">
+                  <div className="text-xl font-bold mb-2">No trips booked yet</div>
+                  <div className="text-slate-500 text-sm mb-6 font-medium">Find a destination and book a local guide to start your journey.</div>
+                  <Link to="/destinations" className="inline-flex items-center justify-center w-full bg-blue-600 text-white shadow-md shadow-blue-500/20 font-bold py-3 rounded-xl hover:bg-blue-50 hover:scale-[1.02] transition-all shadow-lg">
                     Find a Destination
                   </Link>
                 </div>
@@ -150,7 +150,7 @@ export default function TouristDashboard() {
             </div>
 
             {/* AI Assistant */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-blue-900/30 backdrop-blur-xl border-blue-400/20 rounded-3xl shadow-xl border border-white/10 overflow-hidden">
               <AIAssistant />
             </div>
           </div>
