@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import TouristDashboard from './pages/TouristDashboard';
+import GuideDashboard from './pages/GuideDashboard';
+import HotelDashboard from './pages/HotelDashboard';
+import { LogOut } from 'lucide-react';
 import './index.css';
 
-function App() {
+function Home() {
   const [health, setHealth] = useState(null);
+  const { user, profile, logout } = useAuth();
 
   useEffect(() => {
     fetch('http://localhost:5000/api/health')
@@ -16,10 +26,19 @@ function App() {
       {/* Navigation */}
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full">
         <div className="text-xl font-medium tracking-tight text-gray-900">YatraVerse</div>
-        <div className="flex gap-6 text-sm text-gray-600">
-          <a href="#" className="hover:text-gray-900 transition-colors">Destinations</a>
-          <a href="#" className="hover:text-gray-900 transition-colors">Guides</a>
-          <a href="#" className="hover:text-gray-900 transition-colors">Sign In</a>
+        <div className="flex gap-6 text-sm text-gray-600 items-center">
+          <Link to="#" className="hover:text-gray-900 transition-colors">Destinations</Link>
+          <Link to="#" className="hover:text-gray-900 transition-colors">Guides</Link>
+          {user ? (
+            <>
+              <Link to={`/${profile?.role || ''}`} className="hover:text-gray-900 transition-colors font-medium">Dashboard</Link>
+              <button onClick={() => logout()} className="hover:text-gray-900 transition-colors flex items-center gap-1">
+                <LogOut className="w-4 h-4" /> Sign Out
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className="hover:text-gray-900 transition-colors">Sign In</Link>
+          )}
         </div>
       </nav>
 
@@ -52,6 +71,47 @@ function App() {
         )}
       </footer>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          
+          <Route 
+            path="/tourist" 
+            element={
+              <ProtectedRoute allowedRoles={['tourist']}>
+                <TouristDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/guide" 
+            element={
+              <ProtectedRoute allowedRoles={['guide']}>
+                <GuideDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/hotel" 
+            element={
+              <ProtectedRoute allowedRoles={['hotel']}>
+                <HotelDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
