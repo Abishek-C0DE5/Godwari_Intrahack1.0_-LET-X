@@ -32,7 +32,8 @@ export default function DestinationDetails() {
         .from('profiles')
         .select('*')
         .eq('role', 'guide')
-        .ilike('location', `%${destData.location}%`);
+        .ilike('location', `%${destData.location}%`)
+        .limit(1);
       if (guideData) setGuides(guideData);
 
       // 3. Fetch Hotels in this location
@@ -40,7 +41,8 @@ export default function DestinationDetails() {
         .from('profiles')
         .select('*')
         .eq('role', 'hotel')
-        .ilike('location', `%${destData.location}%`);
+        .ilike('location', `%${destData.location}%`)
+        .limit(1);
       if (hotelData) setHotels(hotelData);
 
       setLoading(false);
