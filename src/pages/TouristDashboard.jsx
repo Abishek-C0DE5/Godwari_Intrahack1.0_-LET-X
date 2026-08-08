@@ -100,7 +100,8 @@ export default function TouristDashboard() {
                       src={dest.image_url} 
                       alt={dest.name} 
                       onError={(e) => {
-                        const placeholder = `https://source.unsplash.com/featured/400x300?${encodeURIComponent(dest.name)}`;
+                        e.target.onerror = null;
+                        const placeholder = `https://picsum.photos/seed/${encodeURIComponent(dest.name)}/400/300`;
                         e.target.src = placeholder;
                       }}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 

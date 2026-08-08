@@ -21,7 +21,8 @@ export function Card({
             src={image} 
             alt={title} 
             onError={(e) => {
-              const placeholder = `https://source.unsplash.com/featured/400x300?${encodeURIComponent(title)}`;
+              e.target.onerror = null;
+              const placeholder = `https://picsum.photos/seed/${encodeURIComponent(title)}/400/300`;
               e.target.src = placeholder;
             }}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

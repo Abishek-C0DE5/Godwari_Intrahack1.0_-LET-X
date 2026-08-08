@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Search, Send, User, Building, MapPin } from 'lucide-react';
+import { Search, Send } from 'lucide-react';
 
 export default function Chat() {
   const { profile } = useAuth();
@@ -27,27 +27,54 @@ export default function Chat() {
     }
   ];
 
+  // Store messages by conversation ID
+  const [messagesData, setMessagesData] = useState({
+    1: [
+      { id: 101, text: 'Hi Ram! Are you available for a hike to the Peace Pagoda this Saturday?', sender: 'me', time: '10:00 AM' },
+      { id: 102, text: 'Hello! Yes, I am available. I can take you to the peace pagoda.', sender: 'them', time: '10:30 AM' },
+    ],
+    2: [
+      { id: 201, text: 'Do you have a room available for two people from August 12 to August 15?', sender: 'me', time: 'Yesterday, 14:00' },
+      { id: 202, text: 'Yes, we have a deluxe room available for those dates.', sender: 'them', time: 'Yesterday, 14:30' },
+    ]
+  });
+
   const [activeChat, setActiveChat] = useState(mockConversations[1]);
   const [message, setMessage] = useState('');
-  
-  // Mock messages for active chat
-  const [messages, setMessages] = useState([
-    { id: 1, text: 'Do you have a room available for two people from August 12 to August 15?', sender: 'me', time: 'Yesterday, 14:00' },
-    { id: 2, text: 'Yes, we have a deluxe room available for those dates.', sender: 'them', time: 'Yesterday, 14:30' },
-  ]);
+  const [activeMessages, setActiveMessages] = useState([]);
+
+  // When active chat changes, update the visible messages
+  useEffect(() => {
+    setActiveMessages(messagesData[activeChat.id] || []);
+  }, [activeChat, messagesData]);
 
   const handleSend = (e) => {
     e.preventDefault();
     if (!message.trim()) return;
     
-    // Add message locally for demo
-    setMessages([...messages, { id: Date.now(), text: message, sender: 'me', time: 'Just now' }]);
+    const newMsg = { id: Date.now(), text: message, sender: 'me', time: 'Just now' };
+    
+    // Update global message store
+    setMessagesData(prev => ({
+      ...prev,
+      [activeChat.id]: [...(prev[activeChat.id] || []), newMsg]
+    }));
+    
     setMessage('');
     
-    // Fake response
+    // Fake response depending on type
     setTimeout(() => {
-      setMessages(prev => [...prev, { id: Date.now(), text: 'This is a demo response! Booking confirmed.', sender: 'them', time: 'Just now' }]);
-    }, 1000);
+      const replyText = activeChat.type === 'guide' 
+        ? 'Sounds like a great plan! I will prepare the itinerary.' 
+        : 'Thank you for your message. Your booking is confirmed.';
+        
+      const replyMsg = { id: Date.now(), text: replyText, sender: 'them', time: 'Just now' };
+      
+      setMessagesData(prev => ({
+        ...prev,
+        [activeChat.id]: [...(prev[activeChat.id] || []), replyMsg]
+      }));
+    }, 1500);
   };
 
   return (
@@ -115,7 +142,7 @@ export default function Chat() {
 
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50/50">
-          {messages.map((msg) => (
+          {activeMessages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[70%] rounded-2xl px-5 py-3 ${
                 msg.sender === 'me' 
