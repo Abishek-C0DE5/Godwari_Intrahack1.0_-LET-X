@@ -15,6 +15,44 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.post('/api/ai/chat', async (req, res) => {
+  try {
+    const { message } = req.body;
+    const apiKey = process.env.MISTRAL_API_KEY;
+
+    if (!apiKey) {
+      return res.status(500).json({ error: 'API key is missing on the server.' });
+    }
+
+    const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'mistral-small-latest',
+        messages: [
+          { role: 'system', content: 'You are the YatraVerse AI Travel Assistant. You give helpful, concise travel advice about Nepal.' },
+          { role: 'user', content: message }
+        ]
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.choices && data.choices.length > 0) {
+      res.json({ reply: data.choices[0].message.content });
+    } else {
+      res.status(500).json({ error: 'Failed to generate response' });
+    }
+
+  } catch (error) {
+    console.error('AI API Error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

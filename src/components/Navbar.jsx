@@ -23,10 +23,13 @@ export function Navbar() {
         
         {user ? (
           <div className="flex items-center gap-4 ml-4 pl-4 border-l border-gray-200">
-          <Link to="/profile" className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition-colors font-medium">
-                <User className="w-4 h-4" />
-                Profile
-              </Link>
+            <Link to="/chat" className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition-colors font-medium">
+              Messages
+            </Link>
+            <Link to="/profile" className="flex items-center gap-2 text-gray-900 hover:text-gray-700 transition-colors font-medium">
+              <User className="w-4 h-4" />
+              Profile
+            </Link>
             <button 
               onClick={handleLogout} 
               className="text-gray-500 hover:text-red-600 transition-colors flex items-center gap-1"

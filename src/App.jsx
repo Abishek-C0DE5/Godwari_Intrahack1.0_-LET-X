@@ -59,6 +59,9 @@ import DestinationDetails from './pages/DestinationDetails';
 import Guides from './pages/Guides';
 import Hotels from './pages/Hotels';
 import Leaderboard from './pages/Leaderboard';
+import Profile from './pages/Profile';
+import Chat from './pages/Chat';
+import AIAssistant from './components/AIAssistant';
 
 function App() {
   return (
@@ -102,8 +105,11 @@ function App() {
               } 
             />
             
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/chat" element={<Chat />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
+          <AIAssistant />
         </div>
       </BrowserRouter>
     </AuthProvider>
