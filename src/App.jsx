@@ -15,6 +15,8 @@ import EarthIntro from './components/EarthIntro';
 function Home() {
   const [health, setHealth] = useState(null);
 
+  const [showIntro, setShowIntro] = useState(true);
+
   useEffect(() => {
     fetch('http://localhost:5000/api/health')
       .then(res => res.json())
@@ -24,6 +26,9 @@ function Home() {
 
   return (
     <div className="flex flex-col flex-1 w-full relative">
+      {/* 3D Earth Intro Screen */}
+      {showIntro && <EarthIntro onExplore={() => setShowIntro(false)} />}
+      
       {/* Hero Section */}
       <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-5xl mx-auto w-full mt-10">
         <div className="animate-fade-in-up">
@@ -65,17 +70,23 @@ import HotelLedger from './pages/HotelLedger';
 import AIAssistant from './components/AIAssistant';
 
 function App() {
-  const [showIntro, setShowIntro] = useState(true);
-
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col relative bg-[#00030b] overflow-x-hidden">
-          {/* Global Space Theme Background */}
-          <EarthIntro onExplore={() => setShowIntro(false)} />
+        <div className="min-h-screen flex flex-col relative bg-gray-900 overflow-x-hidden">
+          {/* Global Background Image with Overlay */}
+          <div className="fixed inset-0 z-0">
+            <img 
+              src="/images/bg.png" 
+              alt="Nepal Tourism Background" 
+              className="w-full h-full object-cover animate-fade-in-up"
+              style={{ animationDuration: '2s' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 via-gray-900/60 to-gray-900/90"></div>
+          </div>
           
-          {/* App Content Layer - Fades in after intro */}
-          <div className={`relative z-10 flex flex-col flex-1 text-white transition-opacity duration-1000 ease-in-out ${showIntro ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          {/* App Content Layer */}
+          <div className="relative z-10 flex flex-col flex-1 text-white">
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />

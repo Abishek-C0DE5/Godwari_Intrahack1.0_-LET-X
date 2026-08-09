@@ -3,11 +3,15 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import { OrbitControls, Stars as SparkleStars } from '@react-three/drei';
 import * as THREE from 'three';
 
-function Earth({ isZooming, isFading }) {
+function Earth({ isZooming }) {
   const earth = useRef();
-  const materialRef = useRef();
-  const atmosphereRef = useRef();
-  
+  const earthGroup = useRef();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const texture = useLoader(
     THREE.TextureLoader,
     '/images/earth_day_4096.jpg'
@@ -21,6 +25,11 @@ function Earth({ isZooming, isFading }) {
   useFrame((state, delta) => {
     if (!earth.current) return;
     
+    // Mount Animation: smoothly scale up from 0 to 1
+    if (mounted && earthGroup.current) {
+      earthGroup.current.scale.lerp(new THREE.Vector3(1, 1, 1), 0.05);
+    }
+
     if (isZooming) {
       // Smoothly rotate to face target region
       earth.current.rotation.y = THREE.MathUtils.lerp(earth.current.rotation.y, targetRotationY, 0.03);
@@ -29,41 +38,29 @@ function Earth({ isZooming, isFading }) {
       // Normal slow idle rotation
       earth.current.rotation.y += delta * 0.035;
     }
-
-    if (isFading) {
-      if (materialRef.current) {
-        materialRef.current.transparent = true;
-        materialRef.current.opacity = THREE.MathUtils.lerp(materialRef.current.opacity, 0, 0.08);
-      }
-      if (atmosphereRef.current) {
-        atmosphereRef.current.opacity = THREE.MathUtils.lerp(atmosphereRef.current.opacity, 0, 0.08);
-      }
-    }
   });
 
   return (
-    <group ref={earth} rotation={[0, Math.PI / 2, 0]} position={[0, -0.8, 0]}>
-      <mesh>
-        <sphereGeometry args={[1.5, 192, 192]} />
-        <meshPhongMaterial
-          ref={materialRef}
-          map={texture}
-          shininess={18}
-          specular={new THREE.Color(0x224466)}
-          transparent
-          opacity={1}
-        />
-      </mesh>
-      <mesh scale={[1.025, 1.025, 1.025]}>
-        <sphereGeometry args={[1.5, 192, 192]} />
-        <meshBasicMaterial
-          ref={atmosphereRef}
-          color={0x3b9cff}
-          transparent
-          opacity={0.08}
-          side={THREE.BackSide}
-        />
-      </mesh>
+    <group ref={earthGroup} scale={[0.01, 0.01, 0.01]}>
+      <group ref={earth} rotation={[0, Math.PI / 2, 0]} position={[0, -0.8, 0]}>
+        <mesh>
+          <sphereGeometry args={[1.5, 192, 192]} />
+          <meshPhongMaterial
+            map={texture}
+            shininess={18}
+            specular={new THREE.Color(0x224466)}
+          />
+        </mesh>
+        <mesh scale={[1.025, 1.025, 1.025]}>
+          <sphereGeometry args={[1.5, 192, 192]} />
+          <meshBasicMaterial
+            color={0x3b9cff}
+            transparent
+            opacity={0.08}
+            side={THREE.BackSide}
+          />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -204,13 +201,6 @@ function CameraController({ isZooming }) {
 export default function EarthIntro({ onExplore }) {
   const [isZooming, setIsZooming] = useState(false);
   const [isFading, setIsFading] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    // Small delay to ensure WebGL context is ready before fading in
-    const timer = setTimeout(() => setMounted(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleExplore = () => {
     setIsZooming(true); // Start the cinematic zoom
@@ -228,7 +218,7 @@ export default function EarthIntro({ onExplore }) {
 
   return (
     <div
-      className={`fixed inset-0 z-0 transition-opacity duration-[1500ms] ease-in-out ${mounted ? 'opacity-100' : 'opacity-0'}`}
+      className={`fixed inset-0 z-50 transition-opacity duration-1000 ease-in-out ${isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
       style={{
         width: '100vw',
         height: '100vh',
@@ -237,11 +227,11 @@ export default function EarthIntro({ onExplore }) {
         fontFamily: "'Inter', 'Outfit', sans-serif"
       }}
     >
-      {/* Background Map Image - PERMANENTLY VISIBLE */}
+      {/* Background Map Image - BEHIND EVERYTHING (z-[-1]) */}
       <img 
         src="/images/nepal_map.png" 
         alt="Nepal Map" 
-        className="absolute inset-0 w-full h-full object-contain scale-[1.3] md:scale-150 z-[-1] pointer-events-none opacity-40"
+        className={`absolute inset-0 w-full h-full object-contain scale-[1.3] md:scale-150 z-[-1] transition-opacity duration-700 pointer-events-none opacity-40 ${isZooming ? 'opacity-0' : 'opacity-40'}`}
         style={{
           filter: 'drop-shadow(0 0 30px rgba(59, 156, 255, 0.8))',
         }}
@@ -261,7 +251,7 @@ export default function EarthIntro({ onExplore }) {
         <directionalLight position={[5, 1, -4]} color="#b3d4ff" intensity={1} />
         
         <React.Suspense fallback={null}>
-          <Earth isZooming={isZooming} isFading={isFading} />
+          <Earth isZooming={isZooming} />
         </React.Suspense>
         
         {/* Shimmering / Twinkling Stars */}
