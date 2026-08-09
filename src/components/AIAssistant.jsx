@@ -18,8 +18,8 @@ export default function AIAssistant() {
     setIsTyping(true);
 
     try {
-      // Send to our backend endpoint that securely holds the Mistral API key
-      const response = await fetch('http://localhost:5000/api/ai/chat', {
+      // Send to our backend endpoint (works via proxy locally, and serverless function on Vercel)
+      const response = await fetch('/api/ai/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage })
