@@ -10,8 +10,11 @@ import GuideDashboard from './pages/GuideDashboard';
 import HotelDashboard from './pages/HotelDashboard';
 import './index.css';
 
+import EarthIntro from './components/EarthIntro';
+
 function Home() {
   const [health, setHealth] = useState(null);
+  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/health')
@@ -21,7 +24,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col flex-1 w-full">
+    <div className="flex flex-col flex-1 w-full relative">
+      {/* 3D Earth Intro Screen */}
+      {showIntro && <EarthIntro onExplore={() => setShowIntro(false)} />}
+      
       {/* Hero Section */}
       <main className="flex-1 flex flex-col items-center justify-center px-6 py-24 text-center max-w-5xl mx-auto w-full mt-10">
         <div className="animate-fade-in-up">
