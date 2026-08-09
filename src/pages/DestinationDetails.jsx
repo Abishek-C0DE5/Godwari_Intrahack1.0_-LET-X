@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { Card } from '../components/Card';
 import { MapPin, ArrowLeft } from 'lucide-react';
+import { DestinationImage } from '../components/DestinationImage';
 
 export default function DestinationDetails() {
   const { id } = useParams();
@@ -63,7 +64,12 @@ export default function DestinationDetails() {
       {/* Destination Hero */}
       <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-xl rounded-3xl overflow-hidden shadow-sm border border-white/10 mb-12">
         <div className="aspect-[21/9] w-full relative">
-          <img src={destination.image_url} alt={destination.name} className="w-full h-full object-cover" />
+          <DestinationImage 
+            name={destination.name}
+            originalUrl={destination.image_url}
+            alt={destination.name} 
+            className="w-full h-full object-cover" 
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
           <div className="absolute bottom-8 left-8 right-8">
             <h1 className="text-5xl font-bold text-white mb-2">{destination.name}</h1>

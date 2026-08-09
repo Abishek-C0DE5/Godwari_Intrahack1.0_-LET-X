@@ -43,7 +43,7 @@ Nepal's tourism industry is incredibly rich in culture and landscapes, yet suffe
 ---
 
 ## 🤖 AI Tools Used
-- **Antigravity** - Agentic AI Coding Assistant (Google DeepMind)
+- **Antigravity**
 
 ---
 

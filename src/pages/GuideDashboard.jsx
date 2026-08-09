@@ -201,29 +201,29 @@ export default function GuideDashboard() {
             <form onSubmit={handleSaveProfile} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Display Name</label>
-                  <input type="text" name="name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-slate-50 border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+                  <label className="block text-sm font-semibold text-gray-200 mb-2">Display Name</label>
+                  <input type="text" name="name" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} className="w-full bg-white/5 text-white border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-500" required />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-1"><MapPin className="w-4 h-4"/> Base Location</label>
-                  <input type="text" name="location" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full bg-slate-50 border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+                  <label className="block text-sm font-semibold text-gray-200 mb-2 flex items-center gap-1"><MapPin className="w-4 h-4"/> Base Location</label>
+                  <input type="text" name="location" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full bg-white/5 text-white border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-500" required />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-1"><Briefcase className="w-4 h-4"/> Specialties</label>
-                  <input type="text" name="specialties" value={formData.specialties} onChange={(e) => setFormData({...formData, specialties: e.target.value})} className="w-full bg-slate-50 border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                  <label className="block text-sm font-semibold text-gray-200 mb-2 flex items-center gap-1"><Briefcase className="w-4 h-4"/> Specialties</label>
+                  <input type="text" name="specialties" value={formData.specialties} onChange={(e) => setFormData({...formData, specialties: e.target.value})} className="w-full bg-white/5 text-white border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-500" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-1"><DollarSign className="w-4 h-4"/> Daily Rate</label>
-                  <input type="text" name="price" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} className="w-full bg-slate-50 border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                  <label className="block text-sm font-semibold text-gray-200 mb-2 flex items-center gap-1"><DollarSign className="w-4 h-4"/> Daily Rate</label>
+                  <input type="text" name="price" value={formData.price} onChange={(e) => setFormData({...formData, price: e.target.value})} className="w-full bg-white/5 text-white border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-500" />
                 </div>
               </div>
               
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-2">About Me (Bio)</label>
-                <textarea name="description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows="5" className="w-full bg-slate-50 border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                <label className="block text-sm font-semibold text-gray-200 mb-2">About Me (Bio)</label>
+                <textarea name="description" value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} rows="5" className="w-full bg-white/5 text-white border border-white/10 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none placeholder-gray-500"></textarea>
               </div>
 
               <div className="pt-4 flex justify-end">

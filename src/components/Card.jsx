@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Star, MapPin } from 'lucide-react';
+import { DestinationImage } from './DestinationImage';
 
 export function Card({ 
   id,
@@ -13,25 +14,30 @@ export function Card({
   linkTo,
   actionText = "View Details"
 }) {
-  const placeholder = type === 'guide' 
-    ? `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&size=400`
-    : `https://picsum.photos/seed/${encodeURIComponent(title)}/400/300`;
-    
-  const displayImage = image || placeholder;
+  const avatarPlaceholder = `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&size=400`;
 
   return (
     <div className="bg-black/20 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl overflow-hidden group hover:-translate-y-1 transition-all">
       <div className="relative aspect-[4/3] overflow-hidden bg-black/40 group">
-        <img 
-          src={displayImage} 
-          alt={title}
-          loading="lazy"
-          onError={(e) => {
-            e.target.onerror = null;
-            e.target.src = placeholder;
-          }}
-          className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
-        />
+        {type === 'destination' ? (
+          <DestinationImage 
+            name={title}
+            originalUrl={image}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+          />
+        ) : (
+          <img 
+            src={image || avatarPlaceholder} 
+            alt={title}
+            loading="lazy"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = avatarPlaceholder;
+            }}
+            className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
+          />
+        )}
           {type === 'guide' && (
             <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md border border-white/20 px-2.5 py-1 rounded-lg text-xs font-bold text-white tracking-wider">
               LOCAL GUIDE
@@ -62,7 +68,7 @@ export function Card({
         )}
         
         <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-          <div className="font-semibold text-slate-900">
+          <div className="font-semibold text-blue-400">
             {price ? price : 'Free to explore'}
           </div>
           <Link 
