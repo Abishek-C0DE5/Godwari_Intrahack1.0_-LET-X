@@ -45,7 +45,7 @@ export default function TouristDashboard() {
           .eq('role', 'tourist')
           .gt('points', profile.points || 0);
           
-        setRank((count || 0) + 1);
+        setRank((count || 0) + 11);
       }
     };
 
